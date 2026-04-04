@@ -1,0 +1,4 @@
+cardiovascular inputs: Ozone, PM2.5, Diesel PM, Drinking Water, Lead, Pesticides, Traffic, Cleanup Sites, Groundwater Threats, Haz Waste, Imp Water Bodies, Solid Waste, Education, Linguistic Isolation, Poverty, Unemployment, Housing Burden
+asthma inputs:
+low birthrate inputs:
+toxicity rates inputs: 
