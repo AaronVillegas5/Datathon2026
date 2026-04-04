@@ -1,0 +1,15 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  font-family: 'DM Sans', sans-serif;
+  background: #f5f5f3;
+}
+
+/* Leaflet z-index fix */
+.leaflet-pane { z-index: 400; }
+.leaflet-top, .leaflet-bottom { z-index: 1000; }

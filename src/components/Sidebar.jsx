@@ -1,0 +1,192 @@
+import { useState } from 'react'
+import ScoreRing from './ScoreRing'
+import { scoreLabel, pillClass, barColor, suggestion } from '../utils/scores'
+import styles from './Sidebar.module.css'
+
+const ETHNICITY = [
+  { label: 'Hispanic/Latino', key: 'hispanic', color: '#378ADD' },
+  { label: 'White',           key: 'white',    color: '#1D9E75' },
+  { label: 'Asian',           key: 'asian',    color: '#BA7517' },
+  { label: 'Black',           key: 'black',    color: '#D85A30' },
+]
+
+const RISKS = [
+  {
+    label: 'Toxic release (air)',
+    key: 'toxRelease',
+    title: 'Toxic Air Releases',
+    description: 'Measures the toxicity-weighted concentration of chemical releases into the air from nearby industrial facilities and off-site incineration. Residents in high-scoring areas are regularly breathing air contaminated by factory emissions, which can cause respiratory illness, neurological damage, and increased cancer risk over time.',
+  },
+  {
+    label: 'Asthma rate',
+    key: 'asthma',
+    title: 'Asthma Prevalence',
+    description: 'Reflects the rate of emergency department visits for asthma among residents. A high score means people in this zip code are significantly more likely to suffer asthma attacks serious enough to require emergency care — often triggered by poor air quality, diesel exhaust, and indoor pollutants.',
+  },
+  {
+    label: 'Cardiovascular disease',
+    key: 'cardio',
+    title: 'Cardiovascular Disease',
+    description: 'Tracks the rate of heart attack and cardiovascular emergency visits among adults. Long-term exposure to air pollution, especially fine particles, causes inflammation in blood vessels and increases the risk of heart attacks and strokes. High scores indicate a community already bearing this health burden.',
+  },
+  {
+    label: 'Low birth weight',
+    key: 'lowBirth',
+    title: 'Low Birth Weight',
+    description: 'Measures the percentage of live births where the baby weighs less than 2,500g. Environmental pollution — including air pollutants and toxics — during pregnancy is linked to low birth weight, which raises the risk of developmental delays, chronic illness, and infant mortality.',
+  },
+  {
+    label: 'PM2.5 (fine particles)',
+    key: 'pm25',
+    title: 'Fine Particulate Matter (PM2.5)',
+    description: 'PM2.5 refers to microscopic particles smaller than 2.5 microns — about 30 times thinner than a human hair. These particles penetrate deep into the lungs and enter the bloodstream. Even short-term exposure causes coughing and shortness of breath; long-term exposure is linked to lung cancer, heart disease, and premature death.',
+  },
+  {
+    label: 'Traffic density',
+    key: 'traffic',
+    title: 'Traffic Density',
+    description: 'Measures the volume of vehicle traffic on roads near residential areas, weighted by proximity to homes. High-traffic areas are exposed to elevated levels of nitrogen oxides, diesel particulates, and carbon monoxide from exhaust. People living near busy roads face higher rates of asthma, lung disease, and cardiovascular problems — and children are especially vulnerable.',
+  },
+]
+
+export default function Sidebar({ selected, onZipSearch }) {
+  return (
+    <aside className={styles.sidebar}>
+      <div className={styles.header}>
+        <h1>Healthy Home Audit</h1>
+        <p>CalEnviroScreen 4.0 · Orange County, CA</p>
+      </div>
+
+      <div className={styles.searchWrap}>
+        <input
+          className={styles.input}
+          type="text"
+          placeholder="Enter zip code (e.g. 92703)..."
+          maxLength={5}
+          onChange={(e) => {
+            if (e.target.value.length === 5) onZipSearch(e.target.value)
+          }}
+        />
+      </div>
+
+      <div className={styles.content}>
+        {!selected ? (
+          <div className={styles.empty}>
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+              <circle cx="18" cy="18" r="16" stroke="currentColor" strokeWidth="1.2" />
+              <path d="M18 10v9l5 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+            </svg>
+            <p>Click any marker on the map or enter a zip code to see environmental risk data.</p>
+          </div>
+        ) : (
+          <ZipDetail zip={selected.zip} data={selected.data} />
+        )}
+      </div>
+    </aside>
+  )
+}
+
+function RiskTooltip({ risk, value, children }) {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <div
+      className={styles.riskRow}
+      onMouseEnter={() => setVisible(true)}
+      onMouseLeave={() => setVisible(false)}
+    >
+      {children}
+      {visible && (
+        <div className={styles.tooltip}>
+          <div className={styles.tooltipHeader}>
+            <span className={styles.tooltipTitle}>{risk.title}</span>
+            <span
+              className={styles.tooltipScore}
+              style={{ background: barColor(value) + '22', color: barColor(value) }}
+            >
+              {value}th pctl
+            </span>
+          </div>
+          <p className={styles.tooltipBody}>{risk.description}</p>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function ZipDetail({ zip, data: d }) {
+  const s = suggestion(d.score)
+  return (
+    <div>
+      <span className={styles.zipBadge}>{zip}</span>
+      <p className={styles.zipName}>{d.name}</p>
+
+      <div className={styles.ringWrap}>
+        <div style={{ position: 'relative', width: 84, height: 84 }}>
+          <ScoreRing score={d.score} size={84} />
+          <div className={styles.ringLabel}>
+            <span className={styles.scoreNum}>{d.score}</span>
+            <span className={styles.scoreSub}>CES score</span>
+          </div>
+        </div>
+        <span className={`${styles.pill} ${styles[pillClass(d.score)]}`}>
+          {scoreLabel(d.score)} burden
+        </span>
+      </div>
+
+      <p className={styles.sectionLabel}>
+        Health risk indicators
+        <span className={styles.hoverHint}>hover for details</span>
+      </p>
+
+      {RISKS.map((risk) => (
+        <RiskTooltip key={risk.key} risk={risk} value={d[risk.key]}>
+          <span className={styles.riskLabel}>
+            {risk.label}
+            <svg className={styles.infoIcon} viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.2"/>
+              <path d="M7 6.5v3.5M7 4.5v.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+            </svg>
+          </span>
+          <div className={styles.barWrap}>
+            <div className={styles.bar} style={{ width: `${d[risk.key]}%`, background: barColor(d[risk.key]) }} />
+          </div>
+          <span className={styles.riskVal}>{d[risk.key]}</span>
+        </RiskTooltip>
+      ))}
+
+      <p className={styles.sectionLabel}>Demographics</p>
+      <div className={styles.demoGrid}>
+        <DemoCard label="Total population" value={d.totalPop?.toLocaleString()} />
+        <DemoCard label="Poverty pctl"     value={`${d.poverty}`} />
+        <DemoCard label="Education pctl"   value={`${d.education}`} />
+        <DemoCard label="Census tracts"    value={d.tractCount} />
+      </div>
+
+      <p className={styles.sectionLabel} style={{ marginTop: 12 }}>Ethnicity</p>
+      {ETHNICITY.map(({ label, key, color }) => (
+        <div key={key} className={styles.ethRow}>
+          <span className={styles.ethLabel}>{label}</span>
+          <div className={styles.ethBarWrap}>
+            <div style={{ width: `${d[key]}%`, height: '100%', background: color, borderRadius: 2 }} />
+          </div>
+          <span className={styles.ethVal}>{d[key]}%</span>
+        </div>
+      ))}
+
+      <p className={styles.sectionLabel}>Resilience suggestions</p>
+      <div className={styles.suggestion}>
+        <strong style={{ color: s.color }}>{s.level}</strong> {s.text}
+      </div>
+    </div>
+  )
+}
+
+function DemoCard({ label, value }) {
+  return (
+    <div className={styles.demoCard}>
+      <p className={styles.demoLabel}>{label}</p>
+      <p className={styles.demoVal}>{value}</p>
+    </div>
+  )
+}
