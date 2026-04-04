@@ -1,11 +1,3 @@
-import pandas as pd
-import numpy as np
-from xgboost import XGBRegressor
-from sklearn.model_selection import train_test_split, RandomizedSearchCV
-from sklearn.metrics import mean_squared_error
-import shap
-import math
-import joblib  # for saving/loading models
 from Asthma.asthma_model import load_model, load_and_clean_data   # Import the load_model function from asthma_model.py
 
 
