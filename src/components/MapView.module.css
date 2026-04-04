@@ -1,0 +1,142 @@
+.wrap {
+  flex: 1;
+  position: relative;
+  height: 100%;
+}
+
+/* Controls float above the map */
+.controls {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+/* Mode toggle: Markers / Heatmap */
+.modePills {
+  display: flex;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 99px;
+  padding: 3px;
+  gap: 2px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  pointer-events: all;
+  backdrop-filter: blur(8px);
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  color: #666;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.pill:hover { color: #111; }
+
+.pillActive {
+  background: #111;
+  color: #fff;
+}
+
+.pillActive:hover { color: #fff; }
+
+/* Indicator selector — shown only in heatmap mode */
+.indicatorPills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  max-width: 480px;
+  pointer-events: all;
+}
+
+.indPill {
+  padding: 5px 12px;
+  border-radius: 99px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.92);
+  font-size: 11px;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  color: #555;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+  backdrop-filter: blur(8px);
+}
+
+.indPill:hover {
+  background: #fff;
+  color: #111;
+}
+
+.indPillActive {
+  background: #E24B4A;
+  border-color: #E24B4A;
+  color: #fff;
+}
+
+.indPillActive:hover {
+  background: #c73b3a;
+  color: #fff;
+}
+
+/* Heatmap legend — bottom-right overlay */
+.legend {
+  position: absolute;
+  bottom: 28px;
+  right: 12px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 10px;
+  padding: 10px 14px;
+  min-width: 220px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+}
+
+.legendTitle {
+  font-size: 11px;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 8px;
+  white-space: nowrap;
+}
+
+.legendBar {
+  height: 10px;
+  border-radius: 5px;
+  background: linear-gradient(
+    to right,
+    rgb(22, 60, 160),
+    rgb(120, 40, 200),
+    rgb(220, 30, 120),
+    rgb(230, 50, 50),
+    rgb(140, 0, 0)
+  );
+  margin-bottom: 5px;
+}
+
+.legendLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #888;
+}

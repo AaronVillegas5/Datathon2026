@@ -246,7 +246,33 @@
   padding: 8px 10px;
 }
 
-.demoLabel { font-size: 10px; color: #aaa; margin-bottom: 2px; }
+.demoCardTip {
+  position: relative;
+  cursor: default;
+  transition: background 0.15s;
+}
+.demoCardTip:hover { background: #eeede9; }
+
+.demoTooltip {
+  position: fixed;
+  transform: translateY(-100%);
+  z-index: 99999;
+  background: #1a1a1a;
+  border-radius: 10px;
+  padding: 11px 13px;
+  pointer-events: none;
+  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+}
+
+.demoLabel {
+  font-size: 10px;
+  color: #aaa;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
 .demoVal   { font-size: 13px; font-weight: 500; color: #111; }
 
 .ethRow {

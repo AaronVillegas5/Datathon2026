@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import ScoreRing from './ScoreRing'
 import { scoreLabel, pillClass, barColor, suggestion } from '../utils/scores'
 import styles from './Sidebar.module.css'
@@ -158,8 +158,16 @@ function ZipDetail({ zip, data: d }) {
       <p className={styles.sectionLabel}>Demographics</p>
       <div className={styles.demoGrid}>
         <DemoCard label="Total population" value={d.totalPop?.toLocaleString()} />
-        <DemoCard label="Poverty pctl"     value={`${d.poverty}`} />
-        <DemoCard label="Education pctl"   value={`${d.education}`} />
+        <DemoCard
+          label="Poverty pctl"
+          value={`${d.poverty}`}
+          tooltip="Percentage of the population living below twice the federal poverty level. High poverty percentiles indicate communities with fewer resources to cope with environmental hazards — and are a key factor in CalEnviroScreen's cumulative vulnerability score."
+        />
+        <DemoCard
+          label="Education pctl"
+          value={`${d.education}`}
+          tooltip="Percentage of adults over 25 without a high school diploma, expressed as a statewide percentile. Lower educational attainment correlates with reduced access to environmental health information, fewer job options away from industrial areas, and higher overall vulnerability to pollution impacts."
+        />
         <DemoCard label="Census tracts"    value={d.tractCount} />
       </div>
 
@@ -182,11 +190,41 @@ function ZipDetail({ zip, data: d }) {
   )
 }
 
-function DemoCard({ label, value }) {
+function DemoCard({ label, value, tooltip }) {
+  const [pos, setPos] = useState(null)
+  const cardRef = useRef(null)
+
+  function handleMouseEnter() {
+    if (!tooltip || !cardRef.current) return
+    const r = cardRef.current.getBoundingClientRect()
+    setPos({ top: r.top, left: r.left, width: r.width })
+  }
+
   return (
-    <div className={styles.demoCard}>
-      <p className={styles.demoLabel}>{label}</p>
+    <div
+      ref={cardRef}
+      className={`${styles.demoCard} ${tooltip ? styles.demoCardTip : ''}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={() => setPos(null)}
+    >
+      <p className={styles.demoLabel}>
+        {label}
+        {tooltip && (
+          <svg className={styles.infoIcon} viewBox="0 0 14 14" fill="none">
+            <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.2"/>
+            <path d="M7 6.5v3.5M7 4.5v.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+          </svg>
+        )}
+      </p>
       <p className={styles.demoVal}>{value}</p>
+      {pos && (
+        <div
+          className={styles.demoTooltip}
+          style={{ top: pos.top - 8, left: pos.left, width: pos.width }}
+        >
+          <p className={styles.tooltipBody}>{tooltip}</p>
+        </div>
+      )}
     </div>
   )
 }
