@@ -138,3 +138,5 @@ if __name__ == "__main__":
     shap_importance = get_shap_importance(best_model, X)
     print("\nTop SHAP Feature Importances:")
     print(shap_importance)
+    shap_importance.to_csv("Asthma/shap_importance.csv", index=False)
+    print("SHAP importances saved to Asthma/shap_importance.csv")
