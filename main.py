@@ -2,7 +2,8 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List, Optional
 import pandas as pd
-from Asthma.asthma_model import load_model, load_and_clean_data, predict_full_dataset, add_percentile_rankings
+from Asthma.asthma_statistics import add_percentile_rankings
+from Asthma.asthma_model import load_model, load_and_clean_data, predict_full_dataset
 
 # Initialize FastAPI
 app = FastAPI(title="Asthma Risk API", version="1.0")
@@ -10,11 +11,11 @@ app = FastAPI(title="Asthma Risk API", version="1.0")
 # ---------------------------
 # Load model & data at startup
 # ---------------------------
-MODEL_PATH = "Asthma/best_xgb_model.pkl"
+XGB_MODEL_PATH = "Asthma/best_xgb_model.pkl"
 DATA_PATH = "Asthma/data.csv"
 
 df_clean, X, y = load_and_clean_data(DATA_PATH)
-xgb_model = load_model(MODEL_PATH)
+xgb_model = load_model(XGB_MODEL_PATH)
 
 # Add predictions and percentiles for all ZIPs
 df_clean["pred_asthma_pctl"] = xgb_model.predict(X)

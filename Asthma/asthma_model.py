@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from xgboost import XGBRegressor
 from sklearn.model_selection import train_test_split, RandomizedSearchCV
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, r2_score
 import shap
 import math
 import joblib  # for saving/loading models
@@ -43,8 +43,7 @@ def train_and_save_model(X, y, model_path="best_xgb_model.pkl", random_state=42)
         'colsample_bytree': [0.7, 0.8, 1.0],
         'gamma': [0, 0.1, 0.2],
         'min_child_weight': [1, 3, 5],
-        'early_stopping_rounds': [10, 20],
-        'tree_method': ['gpu_hist']  # Use 'hist' for faster training on larger datasets
+        'tree_method': ['hist']  # Use 'hist' for faster training on larger datasets
     }
     
     random_search = RandomizedSearchCV(
@@ -113,12 +112,14 @@ def get_shap_importance(model, X, max_display=15):
 # ---------------------------
 if __name__ == "__main__":
     # 1. Load data
-    df_clean, X, y = load_and_clean_data("data.csv")
+    df_clean, X, y = load_and_clean_data("Asthma\data.csv")
     
     # 2. Train model or load existing
     best_model, rmse, comparison_df = train_and_save_model(X, y)
-    # best_model = load_model("best_xgb_model.pkl")
+    # best_model = load_model("Asthma\best_xgb_model.pkl")
     print(f"Test RMSE: {rmse:.4f}")
+    y_pred_test = best_model.predict(X)
+    print(f"Test R2: {r2_score(y,y_pred_test):.4f}")
     print("Best Hyperparameters:")
     print(best_model.get_params())
     
