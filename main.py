@@ -6,6 +6,7 @@ import joblib
 
 from Asthma.asthma_statistics import add_percentile_rankings
 from Asthma.asthma_model import load_model, load_and_clean_data
+from health_index.health_index_score import compute_hvi_for_zips, get_top_hvi
 
 # ---------------------------
 # Initialize FastAPI
@@ -121,3 +122,12 @@ def predict_cardiovascular(request: ZIPRequest):
     }).reset_index()
 
     return result_unique.to_dict(orient="records")
+
+# Health Index endpoints
+@app.post("/get-hvi")
+def get_hvi(request: ZIPRequest):
+    return compute_hvi_for_zips(request.zip_codes)
+
+@app.get("/top-vulnerable")
+def top_vulnerable(n: int = 10):
+    return get_top_hvi(n)
