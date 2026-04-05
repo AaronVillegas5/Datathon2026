@@ -164,7 +164,8 @@ def predict_unknown_zip(request: UnknownZIPRequest):
     # 4. Pull other percentile columns directly from the nearest row
     def safe(col):
         val = nearest_row.get(col, np.nan)
-        return round(float(val), 1) if not pd.isna(val) else None
+        num = pd.to_numeric(val, errors='coerce')
+        return round(float(num), 1) if not pd.isna(num) else None
 
     return {
         "zip": zip_code,
@@ -186,6 +187,73 @@ def predict_unknown_zip(request: UnknownZIPRequest):
         "score":      safe("CES 4.0 Percentile"),
         "totalPop":   int(nearest_row.get("Total Population", 0)) if not pd.isna(nearest_row.get("Total Population", np.nan)) else None,
     }
+
+# ----- Batch predict all Melissa zips not in CES dataset -----
+@app.get("/predict-all-unknown")
+def predict_all_unknown():
+    known_zips = set(asthma_df["ZIP"].unique())
+    melissa_zips = set(melissa_df["ZipCode"].unique())
+    unknown_zips = melissa_zips - known_zips
+
+    asthma_features = [
+        "Total Population", "Traffic", "Ozone", "PM2.5",
+        "Diesel PM", "Drinking Water", "Lead", "Pesticides",
+        "Cleanup Sites", "Groundwater Threats", "Haz. Waste",
+        "Imp. Water Bodies", "Solid Waste", "Education",
+        "Linguistic Isolation", "Unemployment", "Housing Burden"
+    ]
+
+    results = {}
+    for zip_code in unknown_zips:
+        mel_row = melissa_df[melissa_df["ZipCode"] == zip_code]
+        if mel_row.empty:
+            continue
+        try:
+            lat = float(mel_row.iloc[0]["Latitude"])
+            lng = float(mel_row.iloc[0]["Longitude"])
+            city = str(mel_row.iloc[0]["City"]).title()
+        except:
+            continue
+
+        nearest_zip = find_nearest_zip(lat, lng)
+        nearest_row = asthma_df[asthma_df["ZIP"] == nearest_zip].iloc[0]
+
+        try:
+            X_asthma = np.array(nearest_row[asthma_features].values, dtype=float).reshape(1, -1)
+            X_cardio  = np.array(nearest_row[CARDIO_FEATURES].values, dtype=float).reshape(1, -1)
+            pred_asthma = float(asthma_model.predict(X_asthma)[0])
+            pred_cardio = float(cardio_model.predict(X_cardio)[0])
+        except:
+            continue
+
+        def safe(col):
+            val = nearest_row.get(col, np.nan)
+            num = pd.to_numeric(val, errors='coerce')
+            return round(float(num), 1) if not pd.isna(num) else 50.0
+
+        results[zip_code] = {
+            "name": city,
+            "score": safe("CES 4.0 Percentile"),
+            "asthma": round(pred_asthma, 1),
+            "cardio": round(pred_cardio, 1),
+            "toxRelease": safe("Tox. Release Pctl"),
+            "lowBirth":   safe("Low Birth Weight Pctl"),
+            "pm25":       safe("PM2.5 Pctl"),
+            "traffic":    safe("Traffic Pctl"),
+            "poverty":    safe("Poverty Pctl"),
+            "education":  safe("Education Pctl"),
+            "totalPop":   int(nearest_row.get("Total Population", 0)) if not pd.isna(nearest_row.get("Total Population", np.nan)) else None,
+            "tractCount": "—",
+            "hispanic": None, "white": None, "asian": None, "black": None,
+            "estimated": True,
+            "nearestZip": nearest_zip,
+            "nearestCity": str(nearest_row.get("Approximate Location", "")).strip(),
+            "distanceKm": round(haversine(lat, lng,
+                float(known_zip_coords[known_zip_coords["ZIP"] == nearest_zip].iloc[0]["lat"]),
+                float(known_zip_coords[known_zip_coords["ZIP"] == nearest_zip].iloc[0]["lng"])), 1),
+        }
+
+    return results
 
 # ----- Asthma -----
 @app.post("/predict-asthma")

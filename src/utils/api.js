@@ -1,5 +1,16 @@
 const API_BASE = 'http://localhost:8000'
 
+export const fetchAllUnknown = async () => {
+  try {
+    const response = await fetch(`${API_BASE}/predict-all-unknown`)
+    if (!response.ok) throw new Error('Batch prediction failed')
+    return await response.json()
+  } catch (error) {
+    console.error('Batch prediction error:', error)
+    return {}
+  }
+}
+
 /**
  * Predict risk factors for a ZIP not in our local dataset
  */

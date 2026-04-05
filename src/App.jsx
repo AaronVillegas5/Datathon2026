@@ -4,6 +4,7 @@ import MapView from './components/MapView'
 import SplashScreen from './components/SplashScreen'
 import ZIPS from './data/zips'
 import { fetchAsthmaData, fetchCardioData, fetchHVI, predictUnknownZip } from './utils/api'
+import PREDICTED_ZIPS from './data/predictedZips'
 import './App.css'
 
 export default function App() {
@@ -11,8 +12,9 @@ export default function App() {
   const [selected, setSelected] = useState(null)
   const [selectedZip, setSelectedZip] = useState(null)
   const [loading, setLoading] = useState(false)
-  const [viewMode, setViewMode] = useState('normal') // 'normal' or 'topVulnerable'
+  const [viewMode, setViewMode] = useState('normal')
   const [topVulnerableZips, setTopVulnerableZips] = useState([])
+  const [predictedZips, setPredictedZips] = useState(PREDICTED_ZIPS)
 
   // Fetch API data when a known ZIP is selected (skip unknown/estimated zips)
   useEffect(() => {
@@ -36,8 +38,8 @@ export default function App() {
       // Merge API data with local data
       const merged = {
         ...localData,
-        asthma: asthmaRes?.[0] || null,
-        cardio: cardioRes?.[0] || null,
+        asthmaApi: asthmaRes?.[0] || null,
+        cardioApi: cardioRes?.[0] || null,
         hvi: hviRes?.[0] || null
       }
 
@@ -57,6 +59,11 @@ export default function App() {
       handleZipSearch(zip)
     } else {
       setSelectedZip(zip)
+      if (!ZIPS[zip]) {
+        // Predicted zip — no API fetch available, show pre-computed data immediately
+        setSelected({ zip, data })
+      }
+      // OC zips: useEffect watches selectedZip and calls fetchPredictionData
     }
   }
 
@@ -66,7 +73,14 @@ export default function App() {
       return
     }
 
-    // ZIP not in local dataset — call prediction API
+    // ZIP not in local dataset — use cache or call prediction API
+    const cached = predictedZips[zip]
+    if (cached) {
+      setSelected({ zip, data: cached })
+      setSelectedZip(zip)
+      return
+    }
+
     setLoading(true)
     try {
       const result = await predictUnknownZip(zip)
@@ -93,6 +107,7 @@ export default function App() {
         nearestCity: result.nearest_city,
         distanceKm: result.distance_km,
       }
+      setPredictedZips(prev => ({ ...prev, [zip]: estimated }))
       setSelected({ zip, data: estimated })
       setSelectedZip(zip)
     } catch (err) {
@@ -147,11 +162,12 @@ export default function App() {
           onLoadTopVulnerable={loadTopVulnerable}
           onBackToNormal={handleBackToNormal}
         />
-        <MapView 
-          onSelect={handleSelect} 
+        <MapView
+          onSelect={handleSelect}
           selectedZip={selectedZip}
           viewMode={viewMode}
           topVulnerableZips={topVulnerableZips}
+          predictedZips={predictedZips}
         />
       </div>
     </>

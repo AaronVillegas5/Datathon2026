@@ -77,7 +77,7 @@ function FlyTo({ zip }) {
   return null
 }
 
-export default function MapView({ onSelect, selectedZip, viewMode, topVulnerableZips }) {
+export default function MapView({ onSelect, selectedZip, viewMode, topVulnerableZips, predictedZips = {} }) {
   const [mode, setMode] = useState('markers')
   const [indicator, setIndicator] = useState('asthma')
   const vulnerableZipSet = new Set(topVulnerableZips?.map(z => z.ZIP?.toString()) || [])
@@ -161,13 +161,16 @@ export default function MapView({ onSelect, selectedZip, viewMode, topVulnerable
 
         {mode === 'markers' && Object.entries(MELISSA_ZIPS).map(([zip, mel]) => {
           const known = ZIPS[zip]
-          if (known) {
+          const predicted = predictedZips[zip]
+          const data = known || predicted
+
+          if (data) {
             return (
               <Marker
                 key={zip}
-                position={[known.lat, known.lng]}
-                icon={makeIcon(zip, known, vulnerableZipSet, viewMode)}
-                eventHandlers={{ click: () => onSelect(zip, known) }}
+                position={[mel.lat, mel.lng]}
+                icon={makeIcon(zip, data, vulnerableZipSet, viewMode)}
+                eventHandlers={{ click: () => onSelect(zip, data) }}
               />
             )
           }

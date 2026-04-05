@@ -109,9 +109,9 @@ export default function Sidebar({ selected, onZipSearch, loading, viewMode, topV
             <div className={styles.spinner} />
             <p>Loading predictions...</p>
           </div>
-        ) : (
+        ) : selected?.data ? (
           <ZipDetail zip={selected.zip} data={selected.data} />
-        )}
+        ) : null}
       </div>
     </aside>
   )
@@ -146,7 +146,8 @@ function RiskTooltip({ risk, value, children }) {
 }
 
 function ZipDetail({ zip, data: d }) {
-  const s = suggestion(d.score)
+  if (!d) return null
+  const s = suggestion(d.score ?? 50)
   return (
     <div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
@@ -227,10 +228,10 @@ function ZipDetail({ zip, data: d }) {
         </>
       )}
 
-      {!d.estimated && (d.asthma || d.cardio) && (
+      {!d.estimated && (d.asthmaApi || d.cardioApi) && (
         <>
           <p className={styles.sectionLabel}>AI-Powered Risk Predictions</p>
-          {d.asthma && (
+          {d.asthmaApi && (
             <div className={styles.predictionCard}>
               <div className={styles.predHeader}>
                 <span>Asthma Risk</span>
@@ -241,19 +242,19 @@ function ZipDetail({ zip, data: d }) {
                   padding: '2px 6px',
                   borderRadius: 3
                 }}>
-                  {Math.round(d.asthma.state_percentile_asthma)}th pctl
+                  {Math.round(d.asthmaApi.state_percentile_asthma)}th pctl
                 </span>
               </div>
               <div className={styles.predValue}>
-                {d.asthma.pred_asthma?.toFixed(1)}
+                {d.asthmaApi.pred_asthma?.toFixed(1)}
               </div>
               <div className={styles.predDetails}>
-                <div>State: {d.asthma.state_percentile_asthma?.toFixed(0)}%</div>
-                <div>County: {d.asthma.county_percentile_asthma?.toFixed(0)}%</div>
+                <div>State: {d.asthmaApi.state_percentile_asthma?.toFixed(0)}%</div>
+                <div>County: {d.asthmaApi.county_percentile_asthma?.toFixed(0)}%</div>
               </div>
             </div>
           )}
-          {d.cardio && (
+          {d.cardioApi && (
             <div className={styles.predictionCard}>
               <div className={styles.predHeader}>
                 <span>Cardiovascular Risk</span>
@@ -264,22 +265,22 @@ function ZipDetail({ zip, data: d }) {
                   padding: '2px 6px',
                   borderRadius: 3
                 }}>
-                  {Math.round(d.cardio.state_percentile_cardio)}th pctl
+                  {Math.round(d.cardioApi.state_percentile_cardio)}th pctl
                 </span>
               </div>
               <div className={styles.predValue}>
-                {d.cardio.pred_cardio?.toFixed(1)}
+                {d.cardioApi.pred_cardio?.toFixed(1)}
               </div>
               <div className={styles.predDetails}>
-                <div>State: {d.cardio.state_percentile_cardio?.toFixed(0)}%</div>
-                <div>County: {d.cardio.county_percentile_cardio?.toFixed(0)}%</div>
+                <div>State: {d.cardioApi.state_percentile_cardio?.toFixed(0)}%</div>
+                <div>County: {d.cardioApi.county_percentile_cardio?.toFixed(0)}%</div>
               </div>
             </div>
           )}
         </>
       )}
 
-      {!d.estimated && d.hvi && (
+      {!d.estimated && d.hvi?.HVI && (
         <>
           <p className={styles.sectionLabel}>Health Vulnerability Index</p>
           <div className={styles.hviCard}>
