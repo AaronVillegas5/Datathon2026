@@ -15,12 +15,12 @@ L.Icon.Default.mergeOptions({
 })
 
 const INDICATORS = [
-  { key: 'asthma',     label: 'Asthma' },
-  { key: 'cardio',     label: 'Cardiovascular' },
-  { key: 'toxRelease', label: 'Toxic Release' },
-  { key: 'lowBirth',   label: 'Low Birth Weight' },
-  { key: 'pm25',       label: 'PM2.5' },
-  { key: 'traffic',    label: 'Traffic Density' },
+  { key: 'asthma',     label: 'Asthma',          model: true },
+  { key: 'cardio',     label: 'Cardiovascular',   model: true },
+  { key: 'toxRelease', label: 'Toxic Release',    model: true },
+  { key: 'lowBirth',   label: 'Low Birth Weight', model: true },
+  { key: 'pm25',       label: 'PM2.5',            model: false },
+  { key: 'traffic',    label: 'Traffic Density',  model: false },
 ]
 
 function makeIcon(zip, data, vulnerableZipSet = new Set(), viewMode = 'normal') {
@@ -108,16 +108,37 @@ export default function MapView({ onSelect, selectedZip, flyTarget, viewMode, to
         </div>
 
         {mode === 'heatmap' && (
-          <div className={styles.indicatorPills}>
-            {INDICATORS.map(({ key, label }) => (
-              <button
-                key={key}
-                className={`${styles.indPill} ${indicator === key ? styles.indPillActive : ''}`}
-                onClick={() => setIndicator(key)}
-              >
-                {label}
-              </button>
-            ))}
+          <div className={styles.indicatorGroup}>
+            <div className={styles.indicatorRow}>
+              <span className={styles.sourceLabel}>
+                <span className={styles.sourceDot} style={{ background: '#7C3AED' }} />
+                ML Model
+              </span>
+              {INDICATORS.filter(i => i.model).map(({ key, label }) => (
+                <button
+                  key={key}
+                  className={`${styles.indPill} ${indicator === key ? styles.indPillActive : ''}`}
+                  onClick={() => setIndicator(key)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <div className={styles.indicatorRow}>
+              <span className={styles.sourceLabel}>
+                <span className={styles.sourceDot} style={{ background: '#2563EB' }} />
+                CES 4.0 Raw
+              </span>
+              {INDICATORS.filter(i => !i.model).map(({ key, label }) => (
+                <button
+                  key={key}
+                  className={`${styles.indPill} ${indicator === key ? styles.indPillActive : ''}`}
+                  onClick={() => setIndicator(key)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
         )}
       </div>

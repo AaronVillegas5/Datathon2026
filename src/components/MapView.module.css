@@ -57,6 +57,48 @@
 .pillActive:hover { color: #fff; }
 
 /* Indicator selector — shown only in heatmap mode */
+.indicatorGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  pointer-events: all;
+}
+
+.indicatorRow {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 99px;
+  padding: 4px 8px 4px 10px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+  backdrop-filter: blur(8px);
+}
+
+.sourceLabel {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #888;
+  white-space: nowrap;
+  padding-right: 4px;
+  border-right: 1px solid rgba(0,0,0,0.1);
+  margin-right: 2px;
+  font-family: 'DM Sans', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sourceDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
 .indicatorPills {
   display: flex;
   flex-wrap: wrap;
