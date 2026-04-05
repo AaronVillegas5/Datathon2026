@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from xgboost import XGBRegressor
 from sklearn.model_selection import train_test_split, RandomizedSearchCV
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 import shap
 import math
 import joblib  # for saving/loading models
@@ -12,7 +12,7 @@ import joblib  # for saving/loading models
 # ---------------------------
 def load_and_clean_data(csv_path):
     df = pd.read_csv(csv_path)
-    
+    df["ZIP"] = df["ZIP"].astype(str).str.zfill(5)  # Ensure ZIP codes are strings with leading zeros
     features = ["Total Population", "Traffic", "Ozone", "PM2.5", 
                 "Diesel PM", "Drinking Water", "Lead", "Pesticides",
                 "Cleanup Sites", "Groundwater Threats", "Haz. Waste",
@@ -123,9 +123,12 @@ if __name__ == "__main__":
     
     # 2. Train model or load existing
     best_model, rmse, comparison_df = train_and_save_model(X, y)
-    # best_model = load_model("Asthma\best_xgb_model.pkl")
+    #best_model = load_model("Asthma\best_xgb_model.pkl")
     print(f"Test RMSE: {rmse:.4f}")
     y_pred_test = best_model.predict(X)
+    y_test = y
+    print(f"Test MAE: {mean_absolute_error(y_test, y_pred_test):.4f}")
+
     print(f"Test R2: {r2_score(y,y_pred_test):.4f}")
     print("Best Hyperparameters:")
     #Test RMSE: 17.4474
@@ -145,6 +148,8 @@ if __name__ == "__main__":
     top10 = get_top_percentile(df_pred, percentile=90)
     print("Top 10% Asthma Risk Neighborhoods:")
     print(top10.head(10))
+    top10.to_csv("Asthma/top_10_percentile_zips.csv", index=False)
+    print("Top 10% ZIPs saved to Asthma/top_10_percentile_zips.csv")
     
     # 6. Get SHAP feature importances
     shap_importance = get_shap_importance(best_model, X)
