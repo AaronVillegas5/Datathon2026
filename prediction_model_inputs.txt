@@ -1,5 +1,5 @@
-cardiovascular inputs: Ozone, PM2.5, Diesel PM, Drinking Water, Lead, Pesticides, Traffic, Cleanup Sites, Groundwater Threats, Haz Waste, Imp Water Bodies, Solid Waste, Education, Linguistic Isolation, Poverty, Unemployment, Housing Burden
-asthma inputs: ["Total Population", "Traffic", "Ozone", "PM2.5", 
+cardiovascular inputs: ["ZIP", "Ozone", "PM2.5", "Diesel PM", "Drinking Water", "Lead", "Pesticides", "Traffic", "Cleanup Sites", "Groundwater Threats", "Haz Waste", "Imp Water Bodies", "Solid Waste", "Education", "Linguistic Isolation", "Poverty", "Unemployment", "Housing Burden"]
+asthma inputs: ["Total Population", "Traffic", "Ozone", "PM2.5", ]
                 "Diesel PM", "Drinking Water", "Lead", "Pesticides",
                 "Cleanup Sites", "Groundwater Threats", "Haz. Waste",
                 "Imp. Water Bodies", "Solid Waste", "Education",

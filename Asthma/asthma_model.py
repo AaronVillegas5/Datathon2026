@@ -18,8 +18,15 @@ def load_and_clean_data(csv_path):
                 "Cleanup Sites", "Groundwater Threats", "Haz. Waste",
                 "Imp. Water Bodies", "Solid Waste", "Education",
                 "Linguistic Isolation", "Unemployment", "Housing Burden"]
+
+    # Drop rows missing target
+    df_clean = df.dropna(subset=["Asthma Pctl"]).copy()
     
-    df_clean = df.dropna(subset=features + ["Asthma Pctl"])
+    # Impute missing values in features
+    for col in features:
+        missing_count = df_clean[col].isna().sum()
+        if missing_count > 0:
+            df_clean[col] = df_clean[col].fillna(df_clean[col].median())
     
     X = df_clean[features]
     y = df_clean["Asthma Pctl"]
@@ -112,7 +119,7 @@ def get_shap_importance(model, X, max_display=15):
 # ---------------------------
 if __name__ == "__main__":
     # 1. Load data
-    df_clean, X, y = load_and_clean_data("Asthma\data.csv")
+    df_clean, X, y = load_and_clean_data("Asthma/data.csv")
     
     # 2. Train model or load existing
     best_model, rmse, comparison_df = train_and_save_model(X, y)
@@ -121,6 +128,11 @@ if __name__ == "__main__":
     y_pred_test = best_model.predict(X)
     print(f"Test R2: {r2_score(y,y_pred_test):.4f}")
     print("Best Hyperparameters:")
+    #Test RMSE: 17.4474
+    #Test R2: 0.8435
+
+
+
     print(best_model.get_params())
     
     # 3. Evaluate RMSE on holdout set if you have train/test split

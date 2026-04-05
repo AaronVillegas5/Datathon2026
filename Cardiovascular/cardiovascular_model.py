@@ -6,9 +6,12 @@ from xgboost import XGBRegressor
 from sklearn.metrics import mean_absolute_error, r2_score
 import matplotlib.pyplot as plt
 import joblib
-
-df = pd.read_csv('cardiovascular.csv.csv')
-
+Features = ["ZIP", "Ozone", "PM2.5", "Diesel PM", "Drinking Water", "Lead", "Pesticides", "Traffic", 
+            "Cleanup Sites", "Groundwater Threats", "Haz. Waste", "Imp. Water Bodies", "Solid Waste", 
+            "Education", "Linguistic Isolation", "Poverty", "Unemployment", "Housing Burden"]
+df = pd.read_csv('Asthma/data.csv')
+df.to_csv('Cardiovascular/cardiovascular.csv.csv', index=False)
+df = df[["Cardiovascular Disease" ] + Features]
 df = df.dropna()
 
 X = df.drop(columns=['Cardiovascular Disease'])

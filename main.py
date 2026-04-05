@@ -1,48 +1,54 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import List
 import pandas as pd
 import joblib
+
 from Asthma.asthma_statistics import add_percentile_rankings
-from Asthma.asthma_model import load_model, load_and_clean_data, predict_full_dataset
+from Asthma.asthma_model import load_model, load_and_clean_data
 
+# ---------------------------
 # Initialize FastAPI
-app = FastAPI(title="Asthma Risk API", version="1.0")
+# ---------------------------
+app = FastAPI(title="Healthy Home API", version="1.0")
 
 # ---------------------------
-# Load model & data at startup
+# Load ASTHMA data & model
 # ---------------------------
-XGB_MODEL_PATH = "Asthma/best_xgb_model.pkl"
-DATA_PATH = "Asthma/data.csv"
+ASTHMA_DATA_PATH = "Asthma/data.csv"
+ASTHMA_MODEL_PATH = "Asthma/best_xgb_model.pkl"
 
-#ASTHMA--------------------------------------------------------------------------------
-df_clean, X, y = load_and_clean_data(DATA_PATH)
-asthma_model = load_model(XGB_MODEL_PATH)
+asthma_df, asthma_X, _ = load_and_clean_data(ASTHMA_DATA_PATH)
+asthma_model = load_model(ASTHMA_MODEL_PATH)
 
-# Add predictions and percentiles for all ZIPs
-df_clean["pred_asthma_pctl"] = asthma_model.predict(X)
-df_clean = add_percentile_rankings(df_clean, pred_col="pred_asthma_pctl")
+# Add asthma predictions & percentiles
+asthma_df["pred_asthma_pctl"] = asthma_model.predict(asthma_X)
+asthma_df = add_percentile_rankings(asthma_df, pred_col="pred_asthma_pctl")
 
-
-#Cardiovascular--------------------------------------------------------------------------------
-FEATURES = [
-    "Ozone", "PM2.5", "Diesel PM", "Drinking Water", "Lead", "Pesticides", "Traffic", "Cleanup Sites", "Groundwater Threats", "Haz Waste", "Imp Water Bodies", "Solid Waste", "Education", "Linguistic Isolation", "Poverty", "Unemployment", "Housing Burden"
+# ---------------------------
+# Load CARDIO model
+# ---------------------------
+CARDIO_MODEL_PATH = "Cardiovascular/cardiovascular_model.pkl"
+CARDIO_FEATURES = [
+    "Ozone", "PM2.5", "Diesel PM", "Drinking Water", "Lead", "Pesticides",
+    "Traffic", "Cleanup Sites", "Groundwater Threats", "Haz. Waste",
+    "Imp. Water Bodies", "Solid Waste", "Education", "Linguistic Isolation",
+    "Poverty", "Unemployment", "Housing Burden"
 ]
 
-def load_cardio_model(path="Cardio/cardiovascular_model.pkl"):
-    return joblib.load(path)
+cardio_model = joblib.load(CARDIO_MODEL_PATH)
 
-def load_cardio_data(csv_path):
-    df = pd.read_csv(csv_path)
-    df = df.dropna(subset=FEATURES)
-    X = df[FEATURES]
-    return df, X
+# ---------------------------
+# Add cardiovascular predictions directly to asthma_df
+# ---------------------------
+# Make sure all required features exist
+missing_features = set(CARDIO_FEATURES) - set(asthma_df.columns)
+if missing_features:
+    raise ValueError(f"Missing features in asthma_df for cardio prediction: {missing_features}")
 
-def predict_cardio(df, X, model):
-    df = df.copy()
-    df["pred_cardio"] = model.predict(X)
-    return df
-
+cardio_X = asthma_df[CARDIO_FEATURES]
+asthma_df["pred_cardio"] = cardio_model.predict(cardio_X)
+asthma_df = add_percentile_rankings(asthma_df, pred_col="pred_cardio")
 
 # ---------------------------
 # Request / Response Models
@@ -50,31 +56,40 @@ def predict_cardio(df, X, model):
 class ZIPRequest(BaseModel):
     zip_codes: List[str]
 
-class ZIPResponse(BaseModel):
-    ZIP: str
-    pred_asthma_pctl: float
-    state_percentile: float
-    county_percentile: float
-    top_5_state: bool
-    top_10_county: bool
-
 # ---------------------------
 # API Endpoints
 # ---------------------------
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to the Healthy Home API!"}
+    return {"message": "Healthy Home API running!"}
+
+# ----- Asthma -----
+@app.post("/predict-asthma")
+def predict_asthma(request: ZIPRequest):
+    zips = request.zip_codes
+    result = asthma_df[asthma_df["ZIP"].isin(zips)]
+    return result[[
+        "ZIP", "pred_asthma_pctl",
+        "state_percentile", "county_percentile",
+        "top_5_state", "top_10_county"
+    ]].to_dict(orient="records")
 
 @app.get("/top-risk-asthma")
-def get_top_risk(percentile: float = 90):
-    top_df = df_clean[df_clean["pred_asthma_pctl"] >= percentile].copy()
-    return top_df[["ZIP", "pred_asthma_pctl", "state_percentile", "county_percentile",
-                   "top_5_state", "top_10_county"]].to_dict(orient="records")
+def top_risk_asthma(percentile: float = 90):
+    top_df = asthma_df[asthma_df["pred_asthma_pctl"] >= percentile].copy()
+    return top_df[[
+        "ZIP", "pred_asthma_pctl",
+        "state_percentile", "county_percentile",
+        "top_5_state", "top_10_county"
+    ]].to_dict(orient="records")
 
-@app.post("/predict-asthma", response_model=List[ZIPResponse])
-def predict_zip(request: ZIPRequest):
+# ----- Cardiovascular -----
+@app.post("/predict-cardiovascular")
+def predict_cardiovascular(request: ZIPRequest):
     zips = request.zip_codes
-    filtered = df_clean[df_clean["ZIP"].isin(zips)].copy()
-    response = filtered[["ZIP", "pred_asthma_pctl", "state_percentile", "county_percentile",
-                         "top_5_state", "top_10_county"]].to_dict(orient="records")
-    return response
+    result = asthma_df[asthma_df["ZIP"].isin(zips)]
+    return result[[
+        "ZIP", "pred_cardio",
+        "state_percentile", "county_percentile",
+        "top_5_state", "top_10_county"
+    ]].to_dict(orient="records")
