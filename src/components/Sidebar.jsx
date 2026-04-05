@@ -49,7 +49,7 @@ const RISKS = [
   },
 ]
 
-export default function Sidebar({ selected, onZipSearch }) {
+export default function Sidebar({ selected, onZipSearch, loading, viewMode, topVulnerable, onLoadTopVulnerable, onBackToNormal }) {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.header}>
@@ -57,26 +57,57 @@ export default function Sidebar({ selected, onZipSearch }) {
         <p>CalEnviroScreen 4.0 · Orange County, CA</p>
       </div>
 
+      <div className={styles.tabs}>
+        <button 
+          className={`${styles.tab} ${viewMode === 'normal' ? styles.tabActive : ''}`}
+          onClick={onBackToNormal}
+        >
+          Search
+        </button>
+        <button 
+          className={`${styles.tab} ${viewMode === 'topVulnerable' ? styles.tabActive : ''}`}
+          onClick={() => onLoadTopVulnerable(10)}
+        >
+          Top 10 Vulnerable
+        </button>
+      </div>
+
       <div className={styles.searchWrap}>
-        <input
-          className={styles.input}
-          type="text"
-          placeholder="Enter zip code (e.g. 92703)..."
-          maxLength={5}
-          onChange={(e) => {
-            if (e.target.value.length === 5) onZipSearch(e.target.value)
-          }}
-        />
+        {viewMode === 'normal' && (
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="Enter zip code (e.g. 92703)..."
+            maxLength={5}
+            onChange={(e) => {
+              if (e.target.value.length === 5) onZipSearch(e.target.value)
+            }}
+          />
+        )}
       </div>
 
       <div className={styles.content}>
-        {!selected ? (
+        {viewMode === 'topVulnerable' ? (
+          loading ? (
+            <div className={styles.empty}>
+              <div className={styles.spinner} />
+              <p>Loading vulnerable areas...</p>
+            </div>
+          ) : (
+            <TopVulnerableList data={topVulnerable} />
+          )
+        ) : !selected ? (
           <div className={styles.empty}>
             <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
               <circle cx="18" cy="18" r="16" stroke="currentColor" strokeWidth="1.2" />
               <path d="M18 10v9l5 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
             </svg>
             <p>Click any marker on the map or enter a zip code to see environmental risk data.</p>
+          </div>
+        ) : loading ? (
+          <div className={styles.empty}>
+            <div className={styles.spinner} />
+            <p>Loading predictions...</p>
           </div>
         ) : (
           <ZipDetail zip={selected.zip} data={selected.data} />
@@ -182,11 +213,124 @@ function ZipDetail({ zip, data: d }) {
         </div>
       ))}
 
+      {(d.asthma || d.cardio) && (
+        <>
+          <p className={styles.sectionLabel}>AI-Powered Risk Predictions</p>
+          {d.asthma && (
+            <div className={styles.predictionCard}>
+              <div className={styles.predHeader}>
+                <span>Asthma Risk</span>
+                <span style={{
+                  fontSize: 12,
+                  background: '#E24B4A22',
+                  color: '#E24B4A',
+                  padding: '2px 6px',
+                  borderRadius: 3
+                }}>
+                  {Math.round(d.asthma.state_percentile_asthma)}th pctl
+                </span>
+              </div>
+              <div className={styles.predValue}>
+                {d.asthma.pred_asthma?.toFixed(1)}
+              </div>
+              <div className={styles.predDetails}>
+                <div>State: {d.asthma.state_percentile_asthma?.toFixed(0)}%</div>
+                <div>County: {d.asthma.county_percentile_asthma?.toFixed(0)}%</div>
+              </div>
+            </div>
+          )}
+          {d.cardio && (
+            <div className={styles.predictionCard}>
+              <div className={styles.predHeader}>
+                <span>Cardiovascular Risk</span>
+                <span style={{
+                  fontSize: 12,
+                  background: '#D85A3022',
+                  color: '#D85A30',
+                  padding: '2px 6px',
+                  borderRadius: 3
+                }}>
+                  {Math.round(d.cardio.state_percentile_cardio)}th pctl
+                </span>
+              </div>
+              <div className={styles.predValue}>
+                {d.cardio.pred_cardio?.toFixed(1)}
+              </div>
+              <div className={styles.predDetails}>
+                <div>State: {d.cardio.state_percentile_cardio?.toFixed(0)}%</div>
+                <div>County: {d.cardio.county_percentile_cardio?.toFixed(0)}%</div>
+              </div>
+            </div>
+          )}
+        </>
+      )}
+
+      {d.hvi && (
+        <>
+          <p className={styles.sectionLabel}>Health Vulnerability Index</p>
+          <div className={styles.hviCard}>
+            <div className={styles.hviHeader}>
+              <span>HVI Score</span>
+            </div>
+            <div className={styles.hviValue}>
+              {d.hvi.hvi_score?.toFixed(2)}
+            </div>
+            <div className={styles.hviDetails}>
+              {d.hvi.rank && <div>Rank: #{d.hvi.rank}</div>}
+              {d.hvi.percentile && <div>Percentile: {d.hvi.percentile?.toFixed(1)}%</div>}
+            </div>
+          </div>
+        </>
+      )}
+
       <p className={styles.sectionLabel}>Resilience suggestions</p>
       <div className={styles.suggestion}>
         <strong style={{ color: s.color }}>{s.level}</strong> {s.text}
       </div>
     </div>
+  )
+}
+
+function TopVulnerableList({ data }) {
+  return (
+    <>
+      <p style={{ fontSize: 12, color: '#666', padding: '12px 0 8px', margin: 0 }}>
+        Top 10 Most Vulnerable ZIP Codes by HVI Score
+      </p>
+      {data && data.length > 0 ? (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+          {data.map((item, idx) => (
+            <div key={idx} className={styles.vulnerableItem}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                <span style={{ fontWeight: 500, fontSize: 13 }}>
+                  #{idx + 1} {item.ZIP}
+                </span>
+                <span style={{
+                  fontSize: 11,
+                  background: '#E24B4A22',
+                  color: '#E24B4A',
+                  padding: '2px 6px',
+                  borderRadius: 3
+                }}>
+                  {item.hvi_score?.toFixed(2)}
+                </span>
+              </div>
+              {item.city && (
+                <div style={{ fontSize: 10, color: '#999', marginBottom: 3 }}>
+                  {item.city}{item.state ? `, ${item.state}` : ''}
+                </div>
+              )}
+              <div style={{ fontSize: 10, color: '#666', lineHeight: 1.4 }}>
+                <div>Asthma Risk: {item.pred_asthma?.toFixed(1)} ({item.state_percentile_asthma?.toFixed(0)}th pctl)</div>
+                <div>Cardio Risk: {item.pred_cardio?.toFixed(1)} ({item.state_percentile_cardio?.toFixed(0)}th pctl)</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p style={{ color: '#999', fontSize: 11 }}>No vulnerability data available</p>
+      )}
+    </>
   )
 }
 

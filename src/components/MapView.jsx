@@ -22,12 +22,16 @@ const INDICATORS = [
   { key: 'traffic',    label: 'Traffic Density' },
 ]
 
-function makeIcon(zip, data) {
-  const color = scoreColor(data.score)
+function makeIcon(zip, data, vulnerableZipSet = new Set(), viewMode = 'normal') {
+  const isVulnerable = vulnerableZipSet.has(zip)
+  const color = isVulnerable ? '#E24B4A' : scoreColor(data.score)
   const label = scoreLabel(data.score)
+  const strokeWidth = isVulnerable ? '2.5' : '1.5'
+  const svgBG = isVulnerable ? '#FFE8E8' : 'white'
+  
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="72" height="36" viewBox="0 0 72 36">
-      <rect x="1" y="1" width="70" height="30" rx="7" fill="${color}" fill-opacity="0.93" stroke="white" stroke-width="1.5"/>
+      <rect x="1" y="1" width="70" height="30" rx="7" fill="${color}" fill-opacity="0.93" stroke="${svgBG}" stroke-width="${strokeWidth}"/>
       <text x="36" y="13" text-anchor="middle" font-family="DM Mono, monospace" font-size="9" font-weight="600" fill="white">${zip}</text>
       <text x="36" y="24" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="8" fill="white" opacity="0.9">${label}</text>
     </svg>`
@@ -55,9 +59,10 @@ function FlyTo({ zip }) {
   return null
 }
 
-export default function MapView({ onSelect, selectedZip }) {
+export default function MapView({ onSelect, selectedZip, viewMode, topVulnerableZips }) {
   const [mode, setMode] = useState('markers')
   const [indicator, setIndicator] = useState('asthma')
+  const vulnerableZipSet = new Set(topVulnerableZips?.map(z => z.ZIP?.toString()) || [])
 
   return (
     <div className={styles.wrap}>
@@ -116,6 +121,14 @@ export default function MapView({ onSelect, selectedZip }) {
         </div>
       )}
 
+      {viewMode === 'topVulnerable' && (
+        <div className={styles.topVulnerableLegend}>
+          <p className={styles.legendTitle}>
+            Top 10 Most Vulnerable Areas Highlighted
+          </p>
+        </div>
+      )}
+
       <MapContainer
         center={[33.72, -117.87]}
         zoom={11}
@@ -132,7 +145,7 @@ export default function MapView({ onSelect, selectedZip }) {
           <Marker
             key={zip}
             position={[data.lat, data.lng]}
-            icon={makeIcon(zip, data)}
+            icon={makeIcon(zip, data, vulnerableZipSet, viewMode)}
             eventHandlers={{ click: () => onSelect(zip, data) }}
           />
         ))}

@@ -140,3 +140,21 @@
   font-size: 10px;
   color: #888;
 }
+
+.topVulnerableLegend {
+  position: absolute;
+  bottom: 28px;
+  right: 12px;
+  z-index: 1000;
+  background: rgba(226, 75, 74, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(226, 75, 74, 0.3);
+  border-radius: 10px;
+  padding: 10px 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+}
+
+.topVulnerableLegend .legendTitle {
+  color: #E24B4A;
+  white-space: nowrap;
+}
