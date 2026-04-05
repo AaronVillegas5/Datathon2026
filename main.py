@@ -311,4 +311,19 @@ def get_hvi(request: ZIPRequest):
 
 @app.get("/top-vulnerable")
 def top_vulnerable(n: int = 10):
-    return get_top_hvi(n)
+    results = get_top_hvi(n)
+    # Merge in asthma/cardio predictions and city name from our enriched dataframe
+    enriched = []
+    for item in results:
+        zip_code = str(item["ZIP"]).zfill(5)
+        row = asthma_df[asthma_df["ZIP"] == zip_code]
+        if not row.empty:
+            r = row.iloc[0]
+            item["pred_asthma"] = round(float(r["pred_asthma"]), 1) if not pd.isna(r["pred_asthma"]) else None
+            item["pred_cardio"] = round(float(r["pred_cardio"]), 1) if not pd.isna(r["pred_cardio"]) else None
+            item["state_percentile_asthma"] = round(float(r["state_percentile_asthma"]), 1) if not pd.isna(r["state_percentile_asthma"]) else None
+            item["state_percentile_cardio"] = round(float(r["state_percentile_cardio"]), 1) if not pd.isna(r["state_percentile_cardio"]) else None
+            item["city"] = str(r.get("Approximate Location", "")).strip()
+        item["hvi_score"] = item.pop("HVI", None)
+        enriched.append(item)
+    return enriched

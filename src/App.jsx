@@ -11,6 +11,7 @@ export default function App() {
   const [showSplash, setShowSplash] = useState(true)
   const [selected, setSelected] = useState(null)
   const [selectedZip, setSelectedZip] = useState(null)
+  const [flyTarget, setFlyTarget] = useState(null)
   const [loading, setLoading] = useState(false)
   const [viewMode, setViewMode] = useState('normal')
   const [topVulnerableZips, setTopVulnerableZips] = useState([])
@@ -59,6 +60,7 @@ export default function App() {
       handleZipSearch(zip)
     } else {
       setSelectedZip(zip)
+      setFlyTarget({ zip, key: Date.now() })
       if (!ZIPS[zip]) {
         // Predicted zip — no API fetch available, show pre-computed data immediately
         setSelected({ zip, data })
@@ -68,6 +70,7 @@ export default function App() {
   }
 
   async function handleZipSearch(zip) {
+    setViewMode('normal')
     if (ZIPS[zip]) {
       handleSelect(zip, ZIPS[zip])
       return
@@ -78,6 +81,7 @@ export default function App() {
     if (cached) {
       setSelected({ zip, data: cached })
       setSelectedZip(zip)
+      setFlyTarget({ zip, key: Date.now() })
       return
     }
 
@@ -110,6 +114,7 @@ export default function App() {
       setPredictedZips(prev => ({ ...prev, [zip]: estimated }))
       setSelected({ zip, data: estimated })
       setSelectedZip(zip)
+      setFlyTarget({ zip, key: Date.now() })
     } catch (err) {
       console.error('Unknown ZIP error:', err)
     } finally {
@@ -165,6 +170,7 @@ export default function App() {
         <MapView
           onSelect={handleSelect}
           selectedZip={selectedZip}
+          flyTarget={flyTarget}
           viewMode={viewMode}
           topVulnerableZips={topVulnerableZips}
           predictedZips={predictedZips}

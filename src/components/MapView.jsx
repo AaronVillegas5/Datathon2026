@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import ZIPS from '../data/zips'
@@ -60,24 +60,21 @@ function makeUnknownIcon(zip) {
   })
 }
 
-function FlyTo({ zip }) {
+function FlyTo({ flyTarget }) {
   const map = useMap()
-  const prev = useRef(null)
 
   useEffect(() => {
-    if (zip && zip !== prev.current) {
-      const loc = ZIPS[zip] || MELISSA_ZIPS[zip]
-      if (loc) {
-        map.flyTo([loc.lat, loc.lng], Math.max(map.getZoom(), 13), { duration: 1 })
-        prev.current = zip
-      }
+    if (!flyTarget?.zip) return
+    const loc = ZIPS[flyTarget.zip] || MELISSA_ZIPS[flyTarget.zip]
+    if (loc) {
+      map.flyTo([loc.lat, loc.lng], Math.max(map.getZoom(), 13), { duration: 1 })
     }
-  }, [zip, map])
+  }, [flyTarget, map])
 
   return null
 }
 
-export default function MapView({ onSelect, selectedZip, viewMode, topVulnerableZips, predictedZips = {} }) {
+export default function MapView({ onSelect, selectedZip, flyTarget, viewMode, topVulnerableZips, predictedZips = {} }) {
   const [mode, setMode] = useState('markers')
   const [indicator, setIndicator] = useState('asthma')
   const vulnerableZipSet = new Set(topVulnerableZips?.map(z => z.ZIP?.toString()) || [])
@@ -186,7 +183,7 @@ export default function MapView({ onSelect, selectedZip, viewMode, topVulnerable
 
         {mode === 'heatmap' && <HeatmapLayer indicator={indicator} />}
 
-        <FlyTo zip={selectedZip} />
+        <FlyTo flyTarget={flyTarget} />
       </MapContainer>
     </div>
   )

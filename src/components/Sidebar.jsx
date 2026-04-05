@@ -94,7 +94,7 @@ export default function Sidebar({ selected, onZipSearch, loading, viewMode, topV
               <p>Loading vulnerable areas...</p>
             </div>
           ) : (
-            <TopVulnerableList data={topVulnerable} />
+            <TopVulnerableList data={topVulnerable} onSelect={onZipSearch} />
           )
         ) : !selected ? (
           <div className={styles.empty}>
@@ -309,7 +309,7 @@ function ZipDetail({ zip, data: d }) {
   )
 }
 
-function TopVulnerableList({ data }) {
+function TopVulnerableList({ data, onSelect }) {
   return (
     <>
       <p style={{ fontSize: 12, color: '#666', padding: '12px 0 8px', margin: 0 }}>
@@ -318,7 +318,12 @@ function TopVulnerableList({ data }) {
       {data && data.length > 0 ? (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
           {data.map((item, idx) => (
-            <div key={idx} className={styles.vulnerableItem}>
+            <div
+              key={idx}
+              className={styles.vulnerableItem}
+              style={{ cursor: 'pointer' }}
+              onClick={() => onSelect(item.ZIP)}
+            >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
                 <span style={{ fontWeight: 500, fontSize: 13 }}>
                   #{idx + 1} {item.ZIP}
@@ -330,17 +335,23 @@ function TopVulnerableList({ data }) {
                   padding: '2px 6px',
                   borderRadius: 3
                 }}>
-                  {item.hvi_score?.toFixed(2)}
+                  HVI {item.hvi_score?.toFixed(2)}
                 </span>
               </div>
               {item.city && (
                 <div style={{ fontSize: 10, color: '#999', marginBottom: 3 }}>
-                  {item.city}{item.state ? `, ${item.state}` : ''}
+                  {item.city}{item['California County'] ? ` · ${item['California County']}` : ''}
                 </div>
               )}
               <div style={{ fontSize: 10, color: '#666', lineHeight: 1.4 }}>
-                <div>Asthma Risk: {item.pred_asthma?.toFixed(1)} ({item.state_percentile_asthma?.toFixed(0)}th pctl)</div>
-                <div>Cardio Risk: {item.pred_cardio?.toFixed(1)} ({item.state_percentile_cardio?.toFixed(0)}th pctl)</div>
+                {item.pred_asthma != null
+                  ? <div>Asthma Risk: {item.pred_asthma?.toFixed(1)} ({item.state_percentile_asthma?.toFixed(0)}th pctl)</div>
+                  : <div style={{ color: '#bbb' }}>Asthma Risk: —</div>
+                }
+                {item.pred_cardio != null
+                  ? <div>Cardio Risk: {item.pred_cardio?.toFixed(1)} ({item.state_percentile_cardio?.toFixed(0)}th pctl)</div>
+                  : <div style={{ color: '#bbb' }}>Cardio Risk: —</div>
+                }
               </div>
             </div>
           ))}

@@ -14,6 +14,7 @@ SDOH_COLS = ["Education Pctl", "Poverty Pctl", "Linguistic Isolation Pctl", "Une
 ALL_COLS = HEALTH_COLS + ENV_COLS + SDOH_COLS
 
 # Fill missing values with mean
+df["California County"] = df["California County"].str.strip()
 df[ALL_COLS] = df[ALL_COLS].apply(pd.to_numeric, errors='coerce')
 # Mean imputation is used for missing values to retain all rows and because these columns are continuous variables.
 df[ALL_COLS] = df[ALL_COLS].fillna(df[ALL_COLS].mean(axis=0))
@@ -39,8 +40,11 @@ def compute_hvi_for_zips(zip_codes: list):
         "Health Subscore", "Environment Subscore", "SDOH Subscore"
     ]].to_dict(orient="records")
 
+LA_OC_COUNTIES = {"Los Angeles", "Orange"}
+
 def get_top_hvi(n: int = 10):
-    top_df = df_scaled.sort_values("HVI", ascending=False).head(n)
+    filtered = df_scaled[df_scaled["California County"].isin(LA_OC_COUNTIES)]
+    top_df = filtered.sort_values("HVI", ascending=False).head(n).copy()
     return top_df[[
         "ZIP", "California County", "HVI", "HVI_Pctl",
         "Health Subscore", "Environment Subscore", "SDOH Subscore"
