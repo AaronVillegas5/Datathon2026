@@ -19,7 +19,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90002": {
     "name": "Los Angeles",
@@ -38,7 +38,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90003": {
     "name": "Broadway Manchester",
@@ -57,7 +57,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90004": {
     "name": "Los Angeles",
@@ -76,7 +76,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90005": {
     "name": "Los Angeles",
@@ -95,7 +95,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90006": {
     "name": "Los Angeles",
@@ -114,7 +114,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90007": {
     "name": "Dockweiler",
@@ -133,7 +133,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90008": {
     "name": "Baldwin Hills",
@@ -152,7 +152,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90010": {
     "name": "Los Angeles",
@@ -171,7 +171,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90011": {
     "name": "Los Angeles",
@@ -190,7 +190,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90012": {
     "name": "Federal",
@@ -209,7 +209,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90013": {
     "name": "Federal",
@@ -228,7 +228,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90014": {
     "name": "Los Angeles",
@@ -269,7 +269,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90016": {
     "name": "Los Angeles",
@@ -288,7 +288,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90017": {
     "name": "Foy",
@@ -307,7 +307,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90018": {
     "name": "Cimarron",
@@ -326,7 +326,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90019": {
     "name": "Los Angeles",
@@ -345,7 +345,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90020": {
     "name": "Los Angeles",
@@ -364,7 +364,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90021": {
     "name": "Los Angeles",
@@ -383,7 +383,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90022": {
     "name": "Commerce",
@@ -402,7 +402,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90023": {
     "name": "Commerce",
@@ -421,7 +421,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90024": {
     "name": "Los Angeles",
@@ -440,7 +440,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90025": {
     "name": "Los Angeles",
@@ -459,7 +459,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90026": {
     "name": "Echo Park",
@@ -478,7 +478,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90027": {
     "name": "Hollywood",
@@ -497,7 +497,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90028": {
     "name": "Hollywood",
@@ -516,7 +516,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90029": {
     "name": "Los Angeles",
@@ -535,7 +535,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90031": {
     "name": "Lincoln Heights",
@@ -554,7 +554,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90032": {
     "name": "Los Angeles",
@@ -573,7 +573,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90033": {
     "name": "Boyle Heights",
@@ -592,7 +592,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90034": {
     "name": "Los Angeles",
@@ -611,7 +611,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90035": {
     "name": "Los Angeles",
@@ -630,7 +630,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90036": {
     "name": "Farmer Market",
@@ -649,7 +649,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90037": {
     "name": "Green",
@@ -668,7 +668,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90038": {
     "name": "Hollywood",
@@ -687,7 +687,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90039": {
     "name": "Griffith",
@@ -706,7 +706,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90040": {
     "name": "Commerce",
@@ -725,7 +725,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90041": {
     "name": "Eagle Rock",
@@ -744,7 +744,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90042": {
     "name": "Highland Park",
@@ -763,7 +763,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90043": {
     "name": "La Tijera",
@@ -782,7 +782,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90044": {
     "name": "August F Haw",
@@ -801,7 +801,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90045": {
     "name": "Bradley International",
@@ -820,7 +820,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90046": {
     "name": "Los Angeles",
@@ -839,7 +839,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90047": {
     "name": "Los Angeles",
@@ -858,7 +858,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90048": {
     "name": "Bicentennial",
@@ -877,7 +877,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90049": {
     "name": "Barrington",
@@ -896,7 +896,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90056": {
     "name": "Baldwin Hills",
@@ -915,7 +915,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90057": {
     "name": "Flint",
@@ -934,7 +934,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90058": {
     "name": "Los Angeles",
@@ -953,7 +953,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90059": {
     "name": "August F Haw",
@@ -972,7 +972,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90061": {
     "name": "August F Haw",
@@ -991,7 +991,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90062": {
     "name": "Los Angeles",
@@ -1010,7 +1010,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90063": {
     "name": "Hazard",
@@ -1029,7 +1029,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90064": {
     "name": "Los Angeles",
@@ -1048,7 +1048,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90065": {
     "name": "Glassell",
@@ -1067,7 +1067,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90066": {
     "name": "Culver Cty",
@@ -1086,7 +1086,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90067": {
     "name": "Century City",
@@ -1105,7 +1105,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90068": {
     "name": "Hollywood",
@@ -1124,7 +1124,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90069": {
     "name": "Los Angeles",
@@ -1143,7 +1143,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90071": {
     "name": "Arco",
@@ -1162,7 +1162,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90073": {
     "name": "Los Angeles",
@@ -1203,7 +1203,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90089": {
     "name": "Los Angeles",
@@ -1244,7 +1244,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90201": {
     "name": "Bell",
@@ -1263,7 +1263,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90210": {
     "name": "Beverly Hills",
@@ -1282,7 +1282,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90211": {
     "name": "Beverly Hills",
@@ -1301,7 +1301,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90212": {
     "name": "Beverly Hills",
@@ -1320,7 +1320,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90220": {
     "name": "Compton",
@@ -1339,7 +1339,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90221": {
     "name": "Compton",
@@ -1358,7 +1358,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90222": {
     "name": "Compton",
@@ -1377,7 +1377,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90230": {
     "name": "Culver City",
@@ -1396,7 +1396,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90232": {
     "name": "Culver City",
@@ -1415,7 +1415,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90240": {
     "name": "Downey",
@@ -1434,7 +1434,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90241": {
     "name": "Downey",
@@ -1453,7 +1453,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90242": {
     "name": "Downey",
@@ -1472,7 +1472,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90245": {
     "name": "El Segundo",
@@ -1491,7 +1491,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90247": {
     "name": "Gardena",
@@ -1510,7 +1510,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90248": {
     "name": "Gardena",
@@ -1529,7 +1529,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90249": {
     "name": "Gardena",
@@ -1548,7 +1548,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90250": {
     "name": "Hawthorne",
@@ -1567,7 +1567,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90254": {
     "name": "Hermosa Beach",
@@ -1586,7 +1586,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90255": {
     "name": "Huntington Park",
@@ -1605,7 +1605,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90260": {
     "name": "Lawndale",
@@ -1624,7 +1624,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90262": {
     "name": "Lynwood",
@@ -1643,7 +1643,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90263": {
     "name": "Malibu",
@@ -1684,7 +1684,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90266": {
     "name": "Manhattan Beach",
@@ -1703,7 +1703,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90270": {
     "name": "Bell Gardens",
@@ -1722,7 +1722,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90272": {
     "name": "Pacific Palisades",
@@ -1741,7 +1741,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90274": {
     "name": "Palos Verdes Estates",
@@ -1760,7 +1760,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90275": {
     "name": "Palos Verdes Estates",
@@ -1779,7 +1779,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90277": {
     "name": "Redondo Beach",
@@ -1798,7 +1798,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90278": {
     "name": "Redondo Beach",
@@ -1817,7 +1817,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90280": {
     "name": "South Gate",
@@ -1836,7 +1836,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90290": {
     "name": "Topanga",
@@ -1855,7 +1855,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90291": {
     "name": "Playa Del Rey",
@@ -1874,7 +1874,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90292": {
     "name": "Marina Del Rey",
@@ -1893,7 +1893,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90293": {
     "name": "Playa Del Rey",
@@ -1912,7 +1912,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90301": {
     "name": "Inglewood",
@@ -1931,7 +1931,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90302": {
     "name": "Inglewood",
@@ -1950,7 +1950,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90303": {
     "name": "Inglewood",
@@ -1969,7 +1969,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90304": {
     "name": "Inglewood",
@@ -1988,7 +1988,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90305": {
     "name": "Inglewood",
@@ -2007,7 +2007,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90401": {
     "name": "Santa Monica",
@@ -2026,7 +2026,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90402": {
     "name": "Santa Monica",
@@ -2045,7 +2045,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90403": {
     "name": "Santa Monica",
@@ -2064,7 +2064,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90404": {
     "name": "Santa Monica",
@@ -2083,7 +2083,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90405": {
     "name": "Santa Monica",
@@ -2102,7 +2102,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90501": {
     "name": "Torrance",
@@ -2121,7 +2121,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90502": {
     "name": "Torrance",
@@ -2140,7 +2140,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90503": {
     "name": "Torrance",
@@ -2159,7 +2159,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90504": {
     "name": "Torrance",
@@ -2178,7 +2178,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90505": {
     "name": "Torrance",
@@ -2197,7 +2197,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90601": {
     "name": "City Of Industry",
@@ -2216,7 +2216,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90602": {
     "name": "Whittier",
@@ -2235,7 +2235,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90603": {
     "name": "Whittier",
@@ -2254,7 +2254,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90604": {
     "name": "Whittier",
@@ -2273,7 +2273,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90605": {
     "name": "Whittier",
@@ -2292,7 +2292,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90606": {
     "name": "Los Nietos",
@@ -2311,7 +2311,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90638": {
     "name": "La Mirada",
@@ -2330,7 +2330,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90639": {
     "name": "La Mirada",
@@ -2371,7 +2371,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90650": {
     "name": "Norwalk",
@@ -2390,7 +2390,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90660": {
     "name": "Pico Rivera",
@@ -2409,7 +2409,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90670": {
     "name": "Santa Fe Springs",
@@ -2428,7 +2428,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90701": {
     "name": "Artesia",
@@ -2447,7 +2447,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90703": {
     "name": "Artesia",
@@ -2466,7 +2466,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90704": {
     "name": "Avalon",
@@ -2485,7 +2485,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90706": {
     "name": "Bellflower",
@@ -2504,7 +2504,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90710": {
     "name": "Harbor City",
@@ -2523,7 +2523,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90712": {
     "name": "Lakewood",
@@ -2542,7 +2542,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90713": {
     "name": "Lakewood",
@@ -2561,7 +2561,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90715": {
     "name": "Lakewood",
@@ -2580,7 +2580,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90716": {
     "name": "Hawaiian Gardens",
@@ -2599,7 +2599,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90717": {
     "name": "Lomita",
@@ -2618,7 +2618,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90723": {
     "name": "Paramount",
@@ -2637,7 +2637,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90731": {
     "name": "Fort Macarthur",
@@ -2656,7 +2656,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90732": {
     "name": "San Pedro",
@@ -2675,7 +2675,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90743": {
     "name": "Surfside",
@@ -2716,7 +2716,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90745": {
     "name": "Carson",
@@ -2735,7 +2735,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90746": {
     "name": "Carson",
@@ -2754,7 +2754,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90747": {
     "name": "C S U Dom Hls",
@@ -2773,7 +2773,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90755": {
     "name": "Long Beach",
@@ -2792,7 +2792,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90802": {
     "name": "Long Beach",
@@ -2811,7 +2811,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90803": {
     "name": "Belmont Shore",
@@ -2830,7 +2830,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90804": {
     "name": "East Long Beach",
@@ -2849,7 +2849,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90805": {
     "name": "Lakewood",
@@ -2868,7 +2868,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90806": {
     "name": "Long Beach",
@@ -2887,7 +2887,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90807": {
     "name": "Bixby Knolls",
@@ -2906,7 +2906,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90808": {
     "name": "Long Beach",
@@ -2925,7 +2925,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90810": {
     "name": "Cabrillo",
@@ -2944,7 +2944,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90813": {
     "name": "Long Beach",
@@ -2963,7 +2963,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90814": {
     "name": "Long Beach",
@@ -2982,7 +2982,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90815": {
     "name": "Long Beach",
@@ -3001,7 +3001,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "90822": {
     "name": "Long Beach",
@@ -3042,7 +3042,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91006": {
     "name": "Arcadia",
@@ -3061,7 +3061,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91007": {
     "name": "Arcadia",
@@ -3080,7 +3080,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91008": {
     "name": "Bradbury",
@@ -3099,7 +3099,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91010": {
     "name": "Duarte",
@@ -3118,7 +3118,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91011": {
     "name": "Flintridge",
@@ -3137,7 +3137,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91016": {
     "name": "Monrovia",
@@ -3156,7 +3156,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91020": {
     "name": "Montrose",
@@ -3175,7 +3175,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91024": {
     "name": "Sierra Madre",
@@ -3194,7 +3194,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91030": {
     "name": "South Pasadena",
@@ -3213,7 +3213,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91040": {
     "name": "Shadow Hills",
@@ -3232,7 +3232,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91042": {
     "name": "Tujunga",
@@ -3251,7 +3251,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91046": {
     "name": "Verdugo City",
@@ -3292,7 +3292,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91103": {
     "name": "Pasadena",
@@ -3311,7 +3311,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91104": {
     "name": "Pasadena",
@@ -3330,7 +3330,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91105": {
     "name": "Pasadena",
@@ -3349,7 +3349,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91106": {
     "name": "Pasadena",
@@ -3368,7 +3368,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91107": {
     "name": "Pasadena",
@@ -3387,7 +3387,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91108": {
     "name": "Pasadena",
@@ -3406,7 +3406,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91125": {
     "name": "Pasadena",
@@ -3447,7 +3447,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91202": {
     "name": "Glendale",
@@ -3466,7 +3466,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91203": {
     "name": "Glendale",
@@ -3485,7 +3485,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91204": {
     "name": "Glendale",
@@ -3504,7 +3504,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91205": {
     "name": "Glendale",
@@ -3523,7 +3523,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91206": {
     "name": "Glendale",
@@ -3542,7 +3542,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91207": {
     "name": "Glendale",
@@ -3561,7 +3561,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91208": {
     "name": "Glendale",
@@ -3580,7 +3580,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91210": {
     "name": "Glendale",
@@ -3621,7 +3621,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91301": {
     "name": "Agoura",
@@ -3640,7 +3640,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91302": {
     "name": "Calabasas",
@@ -3659,7 +3659,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91303": {
     "name": "Canoga Park",
@@ -3678,7 +3678,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91304": {
     "name": "Box Canyon",
@@ -3697,7 +3697,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91306": {
     "name": "Canoga Park",
@@ -3716,7 +3716,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91307": {
     "name": "Bell Canyon",
@@ -3735,7 +3735,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91311": {
     "name": "Chatsworth",
@@ -3754,7 +3754,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91316": {
     "name": "Encino",
@@ -3773,7 +3773,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91321": {
     "name": "Friendly Valley",
@@ -3792,7 +3792,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91324": {
     "name": "Northridge",
@@ -3811,7 +3811,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91325": {
     "name": "Northridge",
@@ -3830,7 +3830,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91326": {
     "name": "Northridge",
@@ -3849,7 +3849,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91330": {
     "name": "Northridge",
@@ -3868,7 +3868,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91331": {
     "name": "Arleta",
@@ -3887,7 +3887,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91335": {
     "name": "Reseda",
@@ -3906,7 +3906,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91340": {
     "name": "San Fernando",
@@ -3925,7 +3925,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91342": {
     "name": "Kagel Canyon",
@@ -3944,7 +3944,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91343": {
     "name": "North Hills",
@@ -3963,7 +3963,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91344": {
     "name": "Granada Hills",
@@ -3982,7 +3982,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91345": {
     "name": "Mission Hills",
@@ -4001,7 +4001,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91350": {
     "name": "Agua Dulce",
@@ -4020,7 +4020,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91351": {
     "name": "Canyon Country",
@@ -4039,7 +4039,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91352": {
     "name": "La Tuna Canyon",
@@ -4058,7 +4058,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91354": {
     "name": "Santa Clarita",
@@ -4077,7 +4077,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91355": {
     "name": "Santa Clarita",
@@ -4096,7 +4096,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91356": {
     "name": "Tarzana",
@@ -4115,7 +4115,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91364": {
     "name": "Woodland Hills",
@@ -4134,7 +4134,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91367": {
     "name": "Woodland Hills",
@@ -4153,7 +4153,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91381": {
     "name": "Newhall",
@@ -4172,7 +4172,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91384": {
     "name": "Castaic",
@@ -4191,7 +4191,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91387": {
     "name": "Canyon Country",
@@ -4210,7 +4210,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91390": {
     "name": "Agua Dulce",
@@ -4229,7 +4229,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91401": {
     "name": "Sherman Oaks",
@@ -4248,7 +4248,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91402": {
     "name": "Panorama City",
@@ -4267,7 +4267,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91403": {
     "name": "Sherman Oaks",
@@ -4286,7 +4286,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91405": {
     "name": "Valley Glen",
@@ -4305,7 +4305,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91406": {
     "name": "Lake Balboa",
@@ -4324,7 +4324,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91411": {
     "name": "Sherman Oaks",
@@ -4343,7 +4343,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91423": {
     "name": "Sherman Oaks",
@@ -4362,7 +4362,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91436": {
     "name": "Encino",
@@ -4381,7 +4381,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91501": {
     "name": "Burbank",
@@ -4400,7 +4400,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91502": {
     "name": "Burbank",
@@ -4419,7 +4419,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91504": {
     "name": "Burbank",
@@ -4438,7 +4438,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91505": {
     "name": "Burbank",
@@ -4457,7 +4457,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91506": {
     "name": "Burbank",
@@ -4476,7 +4476,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91601": {
     "name": "North Hollywood",
@@ -4495,7 +4495,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91602": {
     "name": "North Hollywood",
@@ -4514,7 +4514,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91604": {
     "name": "North Hollywood",
@@ -4533,7 +4533,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91605": {
     "name": "North Hollywood",
@@ -4552,7 +4552,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91606": {
     "name": "North Hollywood",
@@ -4571,7 +4571,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91607": {
     "name": "North Hollywood",
@@ -4590,7 +4590,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91608": {
     "name": "North Hollywood",
@@ -4631,7 +4631,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91706": {
     "name": "Baldwin Park",
@@ -4650,7 +4650,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91711": {
     "name": "Claremont",
@@ -4669,7 +4669,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91722": {
     "name": "Covina",
@@ -4688,7 +4688,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91723": {
     "name": "Covina",
@@ -4707,7 +4707,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91724": {
     "name": "Charter Oak",
@@ -4726,7 +4726,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91731": {
     "name": "El Monte",
@@ -4745,7 +4745,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91732": {
     "name": "City Of Industry",
@@ -4764,7 +4764,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91733": {
     "name": "El Monte",
@@ -4783,7 +4783,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91740": {
     "name": "Glendora",
@@ -4802,7 +4802,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91741": {
     "name": "Glendora",
@@ -4821,7 +4821,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91744": {
     "name": "City Of Industry",
@@ -4840,7 +4840,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91745": {
     "name": "City Of Industry",
@@ -4859,7 +4859,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91746": {
     "name": "Bassett",
@@ -4878,7 +4878,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91748": {
     "name": "City Of Industry",
@@ -4897,7 +4897,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91750": {
     "name": "La Verne",
@@ -4916,7 +4916,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91754": {
     "name": "Monterey Park",
@@ -4935,7 +4935,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91755": {
     "name": "Monterey Park",
@@ -4954,7 +4954,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91759": {
     "name": "Mt Baldy",
@@ -4995,7 +4995,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91766": {
     "name": "Phillips Ranch",
@@ -5014,7 +5014,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91767": {
     "name": "Pomona",
@@ -5033,7 +5033,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91768": {
     "name": "Pomona",
@@ -5052,7 +5052,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91770": {
     "name": "Rosemead",
@@ -5071,7 +5071,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91773": {
     "name": "San Dimas",
@@ -5090,7 +5090,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91775": {
     "name": "San Gabriel",
@@ -5109,7 +5109,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91776": {
     "name": "San Gabriel",
@@ -5128,7 +5128,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91780": {
     "name": "Temple City",
@@ -5147,7 +5147,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91789": {
     "name": "City Of Industry",
@@ -5166,7 +5166,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91790": {
     "name": "West Covina",
@@ -5185,7 +5185,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91791": {
     "name": "West Covina",
@@ -5204,7 +5204,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91792": {
     "name": "West Covina",
@@ -5223,7 +5223,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91801": {
     "name": "Alhambra",
@@ -5242,7 +5242,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "91803": {
     "name": "Alhambra",
@@ -5261,7 +5261,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "92678": {
     "name": "Trabuco Canyon",
@@ -5302,7 +5302,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "93532": {
     "name": "Elizabeth Lake",
@@ -5321,7 +5321,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "93534": {
     "name": "Del Sur",
@@ -5340,7 +5340,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "93535": {
     "name": "Hi Vista",
@@ -5359,7 +5359,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "93536": {
     "name": "Del Sur",
@@ -5378,7 +5378,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "93543": {
     "name": "Juniper Hills",
@@ -5397,7 +5397,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "93544": {
     "name": "Crystalaire",
@@ -5416,7 +5416,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "93550": {
     "name": "Lake Los Angeles",
@@ -5435,7 +5435,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "93551": {
     "name": "City Ranch",
@@ -5454,7 +5454,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "93552": {
     "name": "Palmdale",
@@ -5473,7 +5473,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "93553": {
     "name": "Juniper Hills",
@@ -5514,7 +5514,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   },
   "93591": {
     "name": "Lake Los Angeles",
@@ -5533,7 +5533,7 @@ const PREDICTED_ZIPS = {
     "white": null,
     "asian": null,
     "black": null,
-    "estimated": false
+    "estimated": true
   }
 }
 

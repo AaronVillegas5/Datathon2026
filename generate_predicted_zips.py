@@ -163,7 +163,7 @@ for i, zip_code in enumerate(sorted(target_zips)):
             "totalPop":   safe_int_pop(row.get("Total Population")),
             "tractCount": "—",
             "hispanic": None, "white": None, "asian": None, "black": None,
-            "estimated": False,
+            "estimated": True,
         }
     else:
         # ZIP not in CES at all — use nearest zip
