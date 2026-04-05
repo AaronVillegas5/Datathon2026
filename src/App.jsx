@@ -53,7 +53,11 @@ export default function App() {
   }
 
   function handleSelect(zip, data) {
-    setSelectedZip(zip)
+    if (!data) {
+      handleZipSearch(zip)
+    } else {
+      setSelectedZip(zip)
+    }
   }
 
   async function handleZipSearch(zip) {

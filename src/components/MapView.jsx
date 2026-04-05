@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import ZIPS from '../data/zips'
+import MELISSA_ZIPS from '../data/melissaZips'
 import { scoreColor, scoreLabel } from '../utils/scores'
 import HeatmapLayer from './HeatmapLayer'
 import styles from './MapView.module.css'
@@ -44,15 +45,32 @@ function makeIcon(zip, data, vulnerableZipSet = new Set(), viewMode = 'normal') 
   })
 }
 
+function makeUnknownIcon(zip) {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="62" height="30" viewBox="0 0 62 30">
+      <rect x="1" y="1" width="60" height="28" rx="6" fill="#6b7280" fill-opacity="0.75" stroke="white" stroke-width="1"/>
+      <text x="31" y="11" text-anchor="middle" font-family="DM Mono, monospace" font-size="8" font-weight="600" fill="white">${zip}</text>
+      <text x="31" y="22" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="7" fill="white" opacity="0.8">click to predict</text>
+    </svg>`
+  return L.divIcon({
+    html: svg,
+    className: '',
+    iconSize: [62, 30],
+    iconAnchor: [31, 15],
+  })
+}
+
 function FlyTo({ zip }) {
   const map = useMap()
   const prev = useRef(null)
 
   useEffect(() => {
-    if (zip && zip !== prev.current && ZIPS[zip]) {
-      const { lat, lng } = ZIPS[zip]
-      map.flyTo([lat, lng], Math.max(map.getZoom(), 13), { duration: 1 })
-      prev.current = zip
+    if (zip && zip !== prev.current) {
+      const loc = ZIPS[zip] || MELISSA_ZIPS[zip]
+      if (loc) {
+        map.flyTo([loc.lat, loc.lng], Math.max(map.getZoom(), 13), { duration: 1 })
+        prev.current = zip
+      }
     }
   }, [zip, map])
 
@@ -141,14 +159,27 @@ export default function MapView({ onSelect, selectedZip, viewMode, topVulnerable
           maxZoom={18}
         />
 
-        {mode === 'markers' && Object.entries(ZIPS).map(([zip, data]) => (
-          <Marker
-            key={zip}
-            position={[data.lat, data.lng]}
-            icon={makeIcon(zip, data, vulnerableZipSet, viewMode)}
-            eventHandlers={{ click: () => onSelect(zip, data) }}
-          />
-        ))}
+        {mode === 'markers' && Object.entries(MELISSA_ZIPS).map(([zip, mel]) => {
+          const known = ZIPS[zip]
+          if (known) {
+            return (
+              <Marker
+                key={zip}
+                position={[known.lat, known.lng]}
+                icon={makeIcon(zip, known, vulnerableZipSet, viewMode)}
+                eventHandlers={{ click: () => onSelect(zip, known) }}
+              />
+            )
+          }
+          return (
+            <Marker
+              key={zip}
+              position={[mel.lat, mel.lng]}
+              icon={makeUnknownIcon(zip)}
+              eventHandlers={{ click: () => onSelect(zip, null) }}
+            />
+          )
+        })}
 
         {mode === 'heatmap' && <HeatmapLayer indicator={indicator} />}
 
