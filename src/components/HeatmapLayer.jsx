@@ -1,5 +1,7 @@
 import { Circle } from 'react-leaflet'
 import ZIPS from '../data/zips'
+import MELISSA_ZIPS from '../data/melissaZips'
+import PREDICTED_ZIPS from '../data/predictedZips'
 
 // Color gradient: deep blue → violet → magenta → red
 // Avoids yellows/oranges that blend into OSM map tiles
@@ -24,8 +26,7 @@ function toColor(t) {
   return `rgb(${r},${g},${b})`
 }
 
-// Three concentric rings per zip simulate a gaussian falloff:
-// outer ring fades in, inner ring is most saturated
+// Three concentric rings per zip simulate a gaussian falloff
 const RINGS = [
   { radiusM: 2800, opacity: 0.14 },
   { radiusM: 1800, opacity: 0.20 },
@@ -33,12 +34,15 @@ const RINGS = [
 ]
 
 export default function HeatmapLayer({ indicator }) {
-  return Object.entries(ZIPS).flatMap(([zip, d]) => {
-    const color = toColor((d[indicator] ?? 50) / 100)
+  return Object.entries(MELISSA_ZIPS).flatMap(([zip, mel]) => {
+    const d = ZIPS[zip] || PREDICTED_ZIPS[zip]
+    if (!d) return []
+    const value = d[indicator] ?? 50
+    const color = toColor(value / 100)
     return RINGS.map((ring, ri) => (
       <Circle
         key={`${zip}-${ri}`}
-        center={[d.lat, d.lng]}
+        center={[mel.lat, mel.lng]}
         radius={ring.radiusM}
         pathOptions={{ fillColor: color, fillOpacity: ring.opacity, stroke: false }}
       />
