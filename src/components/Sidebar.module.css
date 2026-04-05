@@ -95,6 +95,29 @@
 
 .empty p { font-size: 12px; line-height: 1.6; }
 
+.estimatedBadge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: #7c3aed;
+  background: #ede9fe;
+  padding: 3px 10px;
+  border-radius: 99px;
+  margin-bottom: 8px;
+}
+
+.estimatedNote {
+  font-size: 11px;
+  color: #666;
+  line-height: 1.6;
+  background: #f5f0ff;
+  border-left: 3px solid #7c3aed;
+  padding: 8px 10px;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 12px;
+}
+
 .zipBadge {
   display: inline-flex;
   align-items: center;

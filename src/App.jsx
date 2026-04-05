@@ -3,7 +3,7 @@ import Sidebar from './components/Sidebar'
 import MapView from './components/MapView'
 import SplashScreen from './components/SplashScreen'
 import ZIPS from './data/zips'
-import { fetchAsthmaData, fetchCardioData, fetchHVI } from './utils/api'
+import { fetchAsthmaData, fetchCardioData, fetchHVI, predictUnknownZip } from './utils/api'
 import './App.css'
 
 export default function App() {
@@ -14,9 +14,9 @@ export default function App() {
   const [viewMode, setViewMode] = useState('normal') // 'normal' or 'topVulnerable'
   const [topVulnerableZips, setTopVulnerableZips] = useState([])
 
-  // Fetch API data when a ZIP is selected
+  // Fetch API data when a known ZIP is selected (skip unknown/estimated zips)
   useEffect(() => {
-    if (selectedZip) {
+    if (selectedZip && ZIPS[selectedZip]) {
       fetchPredictionData(selectedZip)
     }
   }, [selectedZip])
@@ -56,14 +56,55 @@ export default function App() {
     setSelectedZip(zip)
   }
 
-  function handleZipSearch(zip) {
-    const data = ZIPS[zip]
-    if (data) handleSelect(zip, data)
+  async function handleZipSearch(zip) {
+    if (ZIPS[zip]) {
+      handleSelect(zip, ZIPS[zip])
+      return
+    }
+
+    // ZIP not in local dataset — call prediction API
+    setLoading(true)
+    try {
+      const result = await predictUnknownZip(zip)
+      if (!result) return
+      const estimated = {
+        name: result.city,
+        score: result.score ?? 50,
+        asthma: result.asthma,
+        cardio: result.cardio,
+        toxRelease: result.toxRelease ?? 50,
+        lowBirth: result.lowBirth ?? 50,
+        pm25: result.pm25 ?? 50,
+        traffic: result.traffic ?? 50,
+        poverty: result.poverty ?? 50,
+        education: result.education ?? 50,
+        totalPop: result.totalPop,
+        tractCount: '—',
+        hispanic: null,
+        white: null,
+        asian: null,
+        black: null,
+        estimated: true,
+        nearestZip: result.nearest_zip,
+        nearestCity: result.nearest_city,
+        distanceKm: result.distance_km,
+      }
+      setSelected({ zip, data: estimated })
+      setSelectedZip(zip)
+    } catch (err) {
+      console.error('Unknown ZIP error:', err)
+    } finally {
+      setLoading(false)
+    }
   }
 
-  function handleSplashEnter(zip, data) {
+  async function handleSplashEnter(zip, data) {
     setShowSplash(false)
-    handleSelect(zip, data)
+    if (data) {
+      handleSelect(zip, data)
+    } else {
+      await handleZipSearch(zip)
+    }
   }
 
   async function loadTopVulnerable(n = 10) {

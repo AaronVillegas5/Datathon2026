@@ -3,7 +3,6 @@ import numpy as np
 from xgboost import XGBRegressor
 from sklearn.model_selection import train_test_split, RandomizedSearchCV
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
-import shap
 import math
 import joblib  # for saving/loading models
 
@@ -12,16 +11,22 @@ import joblib  # for saving/loading models
 # ---------------------------
 def load_and_clean_data(csv_path):
     df = pd.read_csv(csv_path)
-    df["ZIP"] = df["ZIP"].astype(str).str.zfill(5)  # Ensure ZIP codes are strings with leading zeros
+    df.columns = df.columns.str.strip()
+    df["ZIP"] = df["ZIP"].astype(str).str.strip().str.zfill(5)
     features = ["Total Population", "Traffic", "Ozone", "PM2.5", 
                 "Diesel PM", "Drinking Water", "Lead", "Pesticides",
                 "Cleanup Sites", "Groundwater Threats", "Haz. Waste",
                 "Imp. Water Bodies", "Solid Waste", "Education",
                 "Linguistic Isolation", "Unemployment", "Housing Burden"]
 
+    # Coerce all feature + target columns to numeric (handles stray strings/whitespace)
+    for col in features + ["Asthma Pctl"]:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors='coerce')
+
     # Drop rows missing target
     df_clean = df.dropna(subset=["Asthma Pctl"]).copy()
-    
+
     # Impute missing values in features
     for col in features:
         missing_count = df_clean[col].isna().sum()
@@ -103,6 +108,7 @@ def get_top_percentile(df, percentile=90):
 # 6️⃣ Get SHAP Feature Importances
 # ---------------------------
 def get_shap_importance(model, X, max_display=15):
+    import shap
     explainer = shap.Explainer(model, X)
     shap_values = explainer(X)
     

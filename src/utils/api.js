@@ -1,6 +1,24 @@
 const API_BASE = 'http://localhost:8000'
 
 /**
+ * Predict risk factors for a ZIP not in our local dataset
+ */
+export const predictUnknownZip = async (zip) => {
+  try {
+    const response = await fetch(`${API_BASE}/predict-unknown-zip`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ zip_code: zip })
+    })
+    if (!response.ok) throw new Error('Unknown ZIP prediction failed')
+    return await response.json()
+  } catch (error) {
+    console.error('Unknown ZIP API error:', error)
+    return null
+  }
+}
+
+/**
  * Fetch asthma predictions for one or more ZIP codes
  */
 export const fetchAsthmaData = async (zipCodes) => {

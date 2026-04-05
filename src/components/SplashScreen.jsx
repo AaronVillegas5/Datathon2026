@@ -9,13 +9,10 @@ export default function SplashScreen({ onEnter }) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    if (!ZIPS[zip]) {
-      setError('No data found for that zip code. Try one in Orange County, CA.')
-      return
-    }
     setError('')
     setExiting(true)
-    setTimeout(() => onEnter(zip, ZIPS[zip]), 600)
+    // Pass null for data if not in local dataset — App will call the prediction API
+    setTimeout(() => onEnter(zip, ZIPS[zip] || null), 600)
   }
 
   function handleChange(e) {

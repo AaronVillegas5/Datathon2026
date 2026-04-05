@@ -1,8 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
 import pandas as pd
+import numpy as np
 import joblib
+import math
 
 from Asthma.asthma_statistics import add_percentile_rankings
 from Asthma.asthma_model import load_model, load_and_clean_data
@@ -12,6 +15,13 @@ from health_index.health_index_score import compute_hvi_for_zips, get_top_hvi
 # Initialize FastAPI
 # ---------------------------
 app = FastAPI(title="Healthy Home API", version="1.0")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # ---------------------------
 # Load ASTHMA data & model
@@ -29,7 +39,7 @@ asthma_df = asthma_df.rename(columns={
     "state_percentile": "state_percentile_asthma",
     "county_percentile": "county_percentile_asthma"
 })
-asthma_df["ZIP"] = asthma_df["ZIP"].astype(str)
+asthma_df["ZIP"] = asthma_df["ZIP"].astype(str).str.strip()
 
 # ---------------------------
 # Load CARDIO model
@@ -44,22 +54,61 @@ CARDIO_FEATURES = [
 
 cardio_model = joblib.load(CARDIO_MODEL_PATH)
 
-# ---------------------------
-# Add cardiovascular predictions & percentiles
-# ---------------------------
 missing_features = set(CARDIO_FEATURES) - set(asthma_df.columns)
 if missing_features:
     raise ValueError(f"Missing features in asthma_df for cardio prediction: {missing_features}")
 
+for col in CARDIO_FEATURES:
+    asthma_df[col] = pd.to_numeric(asthma_df[col], errors='coerce').fillna(0)
+
 cardio_X = asthma_df[CARDIO_FEATURES]
 asthma_df["pred_cardio"] = cardio_model.predict(cardio_X)
-asthma_df = add_percentile_rankings(
-    asthma_df, pred_col="pred_cardio")
+asthma_df = add_percentile_rankings(asthma_df, pred_col="pred_cardio")
 asthma_df = asthma_df.rename(columns={
     "state_percentile": "state_percentile_cardio",
     "county_percentile": "county_percentile_cardio"
 })
 
+# ---------------------------
+# Load Melissa ZIP geocode table
+# (has lat/lng for every US zip code)
+# ---------------------------
+melissa_df = pd.read_csv("Asthma/Melissa_zipcodes.csv")
+melissa_df["ZipCode"] = melissa_df["ZipCode"].astype(str).str.zfill(5)
+melissa_df = melissa_df.drop_duplicates(subset="ZipCode")
+
+# Build a lat/lng lookup for known zips in our dataset
+# using the Melissa table (more complete than data.csv coords)
+known_zip_coords = (
+    asthma_df[["ZIP", "Latitude", "Longitude"]].copy()
+    .rename(columns={"Latitude": "lat", "Longitude": "lng"})
+    .dropna(subset=["lat", "lng"])
+    .drop_duplicates(subset="ZIP")
+)
+known_zip_coords["lat"] = pd.to_numeric(known_zip_coords["lat"], errors="coerce")
+known_zip_coords["lng"] = pd.to_numeric(known_zip_coords["lng"], errors="coerce")
+known_zip_coords = known_zip_coords.dropna()
+
+# ---------------------------
+# Haversine distance (km)
+# ---------------------------
+def haversine(lat1, lng1, lat2, lng2):
+    R = 6371.0
+    dlat = math.radians(lat2 - lat1)
+    dlng = math.radians(lng2 - lng1)
+    a = (math.sin(dlat / 2) ** 2
+         + math.cos(math.radians(lat1))
+         * math.cos(math.radians(lat2))
+         * math.sin(dlng / 2) ** 2)
+    return R * 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+
+def find_nearest_zip(lat: float, lng: float) -> str:
+    """Return the nearest known ZIP code in our dataset by haversine distance."""
+    coords = known_zip_coords.copy()
+    coords["dist"] = coords.apply(
+        lambda r: haversine(lat, lng, r["lat"], r["lng"]), axis=1
+    )
+    return coords.loc[coords["dist"].idxmin(), "ZIP"]
 
 # ---------------------------
 # Request / Response Models
@@ -67,12 +116,76 @@ asthma_df = asthma_df.rename(columns={
 class ZIPRequest(BaseModel):
     zip_codes: List[str]
 
+class UnknownZIPRequest(BaseModel):
+    zip_code: str
+
 # ---------------------------
 # API Endpoints
 # ---------------------------
 @app.get("/")
 def read_root():
     return {"message": "Healthy Home API running!"}
+
+# ----- Unknown ZIP prediction -----
+@app.post("/predict-unknown-zip")
+def predict_unknown_zip(request: UnknownZIPRequest):
+    zip_code = request.zip_code.strip().zfill(5)
+
+    # 1. Geocode via Melissa table
+    melissa_row = melissa_df[melissa_df["ZipCode"] == zip_code]
+    if melissa_row.empty:
+        raise HTTPException(status_code=404, detail=f"ZIP {zip_code} not found in geocode database")
+
+    lat = float(melissa_row.iloc[0]["Latitude"])
+    lng = float(melissa_row.iloc[0]["Longitude"])
+    city = str(melissa_row.iloc[0]["City"])
+
+    # 2. Find nearest known ZIP in our CalEnviroScreen dataset
+    nearest_zip = find_nearest_zip(lat, lng)
+    nearest_row = asthma_df[asthma_df["ZIP"] == nearest_zip].iloc[0]
+    nearest_lat = known_zip_coords[known_zip_coords["ZIP"] == nearest_zip].iloc[0]["lat"]
+    nearest_lng = known_zip_coords[known_zip_coords["ZIP"] == nearest_zip].iloc[0]["lng"]
+    distance_km = haversine(lat, lng, nearest_lat, nearest_lng)
+
+    # 3. Use nearest ZIP's features to predict via both models
+    asthma_features = [
+        "Total Population", "Traffic", "Ozone", "PM2.5",
+        "Diesel PM", "Drinking Water", "Lead", "Pesticides",
+        "Cleanup Sites", "Groundwater Threats", "Haz. Waste",
+        "Imp. Water Bodies", "Solid Waste", "Education",
+        "Linguistic Isolation", "Unemployment", "Housing Burden"
+    ]
+    X_asthma = np.array(nearest_row[asthma_features].values, dtype=float).reshape(1, -1)
+    X_cardio  = np.array(nearest_row[CARDIO_FEATURES].values, dtype=float).reshape(1, -1)
+
+    pred_asthma = float(asthma_model.predict(X_asthma)[0])
+    pred_cardio = float(cardio_model.predict(X_cardio)[0])
+
+    # 4. Pull other percentile columns directly from the nearest row
+    def safe(col):
+        val = nearest_row.get(col, np.nan)
+        return round(float(val), 1) if not pd.isna(val) else None
+
+    return {
+        "zip": zip_code,
+        "city": str(city),
+        "estimated": True,
+        "nearest_zip": nearest_zip,
+        "nearest_city": str(nearest_row.get("Approximate Location", "")).strip(),
+        "distance_km": round(distance_km, 1),
+        # Model predictions
+        "asthma": round(pred_asthma, 1),
+        "cardio": round(pred_cardio, 1),
+        # Pull remaining indicators from nearest zip's data
+        "toxRelease": safe("Tox. Release Pctl"),
+        "lowBirth":   safe("Low Birth Weight Pctl"),
+        "pm25":       safe("PM2.5 Pctl"),
+        "traffic":    safe("Traffic Pctl"),
+        "poverty":    safe("Poverty Pctl"),
+        "education":  safe("Education Pctl"),
+        "score":      safe("CES 4.0 Percentile"),
+        "totalPop":   int(nearest_row.get("Total Population", 0)) if not pd.isna(nearest_row.get("Total Population", np.nan)) else None,
+    }
 
 # ----- Asthma -----
 @app.post("/predict-asthma")
@@ -123,7 +236,7 @@ def predict_cardiovascular(request: ZIPRequest):
 
     return result_unique.to_dict(orient="records")
 
-# Health Index endpoints
+# ----- Health Index -----
 @app.post("/get-hvi")
 def get_hvi(request: ZIPRequest):
     return compute_hvi_for_zips(request.zip_codes)

@@ -4,6 +4,8 @@ from sklearn.preprocessing import MinMaxScaler
 
 DATA_PATH = "Asthma/data.csv"
 df = pd.read_csv(DATA_PATH, dtype={"ZIP": str})
+df.columns = df.columns.str.strip()
+df["ZIP"] = df["ZIP"].astype(str).str.strip().str.zfill(5)
 
 HEALTH_COLS = ["Asthma Pctl", "Cardiovascular Disease Pctl", "Low Birth Weight Pctl"]
 ENV_COLS = ["Pollution Burden Score"]
