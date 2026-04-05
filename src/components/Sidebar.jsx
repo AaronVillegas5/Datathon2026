@@ -273,11 +273,10 @@ function ZipDetail({ zip, data: d }) {
               <span>HVI Score</span>
             </div>
             <div className={styles.hviValue}>
-              {d.hvi.hvi_score?.toFixed(2)}
+              {d.hvi.HVI?.toFixed(2)}
             </div>
             <div className={styles.hviDetails}>
-              {d.hvi.rank && <div>Rank: #{d.hvi.rank}</div>}
-              {d.hvi.percentile && <div>Percentile: {d.hvi.percentile?.toFixed(1)}%</div>}
+              <div>Percentile: {d.hvi.HVI_Pctl?.toFixed(1)}%</div>
             </div>
           </div>
         </>
@@ -312,14 +311,12 @@ function TopVulnerableList({ data }) {
                   padding: '2px 6px',
                   borderRadius: 3
                 }}>
-                  {item.hvi_score?.toFixed(2)}
+                  {item.HVI?.toFixed(2)}
                 </span>
               </div>
-              {item.city && (
-                <div style={{ fontSize: 10, color: '#999', marginBottom: 3 }}>
-                  {item.city}{item.state ? `, ${item.state}` : ''}
-                </div>
-              )}
+              <div style={{ fontSize: 10, color: '#999', marginBottom: 3 }}>
+                {item['California County']} County
+              </div>
               <div style={{ fontSize: 10, color: '#666', lineHeight: 1.4 }}>
                 <div>Asthma Risk: {item.pred_asthma?.toFixed(1)} ({item.state_percentile_asthma?.toFixed(0)}th pctl)</div>
                 <div>Cardio Risk: {item.pred_cardio?.toFixed(1)} ({item.state_percentile_cardio?.toFixed(0)}th pctl)</div>
