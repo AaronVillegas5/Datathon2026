@@ -1,10 +1,15 @@
 import pandas as pd
 import geopandas as gpd
 import numpy as np
+from pathlib import Path
 from scipy.spatial import cKDTree
 import requests
 import os
 from dotenv import load_dotenv
+
+BACKEND_DIR = Path(__file__).resolve().parents[1]
+BASE_DIR = BACKEND_DIR.parent
+DATA_DIR = BASE_DIR / "data"
 
 # ---------------------------
 # Load API key
@@ -17,7 +22,7 @@ if API_KEY is None:
 # ---------------------------
 # 1️⃣ Load Melissa ZIP code dataset
 # ---------------------------
-melissa_df = pd.read_csv("Asthma/Melissa_zipcodes.csv")
+melissa_df = pd.read_csv(DATA_DIR / "Melissa_zipcodes.csv")
 melissa_df = melissa_df[['ZipCode', 'Latitude', 'Longitude']]
 
 # Only Orange County ZIPs
@@ -63,7 +68,7 @@ melissa_gdf['avg_pm25'] = sensors_df.iloc[indices]['pm2.5'].values
 # ---------------------------
 # 4️⃣ Merge with asthma dataset (Orange County only)
 # ---------------------------
-asthma_df = pd.read_csv("Asthma/data.csv")
+asthma_df = pd.read_csv(DATA_DIR / "data.csv")
 asthma_df = asthma_df[asthma_df['California County'] == 'Orange County'].copy()
 asthma_df['ZIP'] = asthma_df['ZIP'].astype(str).str.zfill(5)
 melissa_gdf['ZipCode'] = melissa_gdf['ZipCode'].astype(str).str.zfill(5)

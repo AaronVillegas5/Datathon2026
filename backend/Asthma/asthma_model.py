@@ -1,10 +1,16 @@
 import pandas as pd
 import numpy as np
+from pathlib import Path
 from xgboost import XGBRegressor
 from sklearn.model_selection import train_test_split, RandomizedSearchCV
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 import math
 import joblib  # for saving/loading models
+
+BACKEND_DIR = Path(__file__).resolve().parents[1]
+BASE_DIR = BACKEND_DIR.parent
+DATA_DIR = BASE_DIR / "data"
+MODELS_DIR = BASE_DIR / "models"
 
 # ---------------------------
 # 1️⃣ Load & Clean Data
@@ -125,10 +131,10 @@ def get_shap_importance(model, X, max_display=15):
 # ---------------------------
 if __name__ == "__main__":
     # 1. Load data
-    df_clean, X, y = load_and_clean_data("Asthma/data.csv")
+    df_clean, X, y = load_and_clean_data(DATA_DIR / "data.csv")
     
     # 2. Train model or load existing
-    best_model, rmse, comparison_df = train_and_save_model(X, y)
+    best_model, rmse, comparison_df = train_and_save_model(X, y, MODELS_DIR / "best_xgb_model.pkl")
     #best_model = load_model("Asthma\best_xgb_model.pkl")
     print(f"Test RMSE: {rmse:.4f}")
     y_pred_test = best_model.predict(X)
@@ -154,12 +160,12 @@ if __name__ == "__main__":
     top10 = get_top_percentile(df_pred, percentile=90)
     print("Top 10% Asthma Risk Neighborhoods:")
     print(top10.head(10))
-    top10.to_csv("Asthma/top_10_percentile_zips.csv", index=False)
-    print("Top 10% ZIPs saved to Asthma/top_10_percentile_zips.csv")
+    top10.to_csv(DATA_DIR / "top_10_percentile_zips.csv", index=False)
+    print("Top 10% ZIPs saved to data/top_10_percentile_zips.csv")
     
     # 6. Get SHAP feature importances
     shap_importance = get_shap_importance(best_model, X)
     print("\nTop SHAP Feature Importances:")
     print(shap_importance)
-    shap_importance.to_csv("Asthma/shap_importance.csv", index=False)
-    print("SHAP importances saved to Asthma/shap_importance.csv")
+    shap_importance.to_csv(DATA_DIR / "shap_importance.csv", index=False)
+    print("SHAP importances saved to data/shap_importance.csv")

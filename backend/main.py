@@ -2,14 +2,20 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
+from pathlib import Path
 import pandas as pd
 import numpy as np
 import joblib
 import math
 
-from Asthma.asthma_statistics import add_percentile_rankings
-from Asthma.asthma_model import load_model, load_and_clean_data
-from health_index.health_index_score import compute_hvi_for_zips, get_top_hvi
+try:
+    from .Asthma.asthma_statistics import add_percentile_rankings
+    from .Asthma.asthma_model import load_model, load_and_clean_data
+    from .health_index.health_index_score import compute_hvi_for_zips, get_top_hvi
+except ImportError:
+    from Asthma.asthma_statistics import add_percentile_rankings
+    from Asthma.asthma_model import load_model, load_and_clean_data
+    from health_index.health_index_score import compute_hvi_for_zips, get_top_hvi
 
 # ---------------------------
 # Initialize FastAPI
@@ -26,8 +32,11 @@ app.add_middleware(
 # ---------------------------
 # Load ASTHMA data & model
 # ---------------------------
-ASTHMA_DATA_PATH = "Asthma/data.csv"
-ASTHMA_MODEL_PATH = "Asthma/best_xgb_model.pkl"
+CURRENT_DIR = Path(__file__).resolve().parent
+BASE_DIR = CURRENT_DIR.parent if CURRENT_DIR.name == "backend" else CURRENT_DIR
+
+ASTHMA_DATA_PATH = BASE_DIR / "data" / "data.csv"
+ASTHMA_MODEL_PATH = BASE_DIR / "models" / "best_xgb_model.pkl"
 
 asthma_df, asthma_X, _ = load_and_clean_data(ASTHMA_DATA_PATH)
 asthma_model = load_model(ASTHMA_MODEL_PATH)
@@ -44,7 +53,7 @@ asthma_df["ZIP"] = asthma_df["ZIP"].astype(str).str.strip()
 # ---------------------------
 # Load CARDIO model
 # ---------------------------
-CARDIO_MODEL_PATH = "Cardiovascular/cardiovascular_model.pkl"
+CARDIO_MODEL_PATH = BASE_DIR / "models" / "cardiovascular_model.pkl"
 CARDIO_FEATURES = [
     "Ozone", "PM2.5", "Diesel PM", "Drinking Water", "Lead", "Pesticides",
     "Traffic", "Cleanup Sites", "Groundwater Threats", "Haz. Waste",
@@ -73,7 +82,7 @@ asthma_df = asthma_df.rename(columns={
 # Load Melissa ZIP geocode table
 # (has lat/lng for every US zip code)
 # ---------------------------
-melissa_df = pd.read_csv("Asthma/Melissa_zipcodes.csv")
+melissa_df = pd.read_csv(BASE_DIR / "data" / "Melissa_zipcodes.csv")
 melissa_df["ZipCode"] = melissa_df["ZipCode"].astype(str).str.zfill(5)
 melissa_df = melissa_df.drop_duplicates(subset="ZipCode")
 

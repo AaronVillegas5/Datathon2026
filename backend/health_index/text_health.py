@@ -1,5 +1,8 @@
 # test_hvi.py
-from health_index_score import compute_hvi_for_zips, get_top_hvi
+try:
+    from .health_index_score import compute_hvi_for_zips, get_top_hvi
+except ImportError:
+    from health_index_score import compute_hvi_for_zips, get_top_hvi
 
 def main():
     test_zips = ["93706", "90043", "92612"]

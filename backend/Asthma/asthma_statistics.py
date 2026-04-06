@@ -1,8 +1,13 @@
 # Asthma/asthma_statistics.py
 
 # ✅ Use relative imports for package compatibility
-from .asthma_model import load_and_clean_data, load_model
+from pathlib import Path
 import pandas as pd
+
+try:
+    from .asthma_model import load_and_clean_data, load_model
+except ImportError:
+    from asthma_model import load_and_clean_data, load_model
 
 # ---------------------------
 # Compare ZIPs to County & State Percentiles
@@ -32,12 +37,9 @@ def add_percentile_rankings(df, pred_col='pred_asthma_pctl'):
 # Example usage if run as a module
 # ---------------------------
 if __name__ == "__main__":
-    import os
-
-    # Make paths relative to this script
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    DATA_PATH = os.path.join(BASE_DIR, "data.csv")
-    MODEL_PATH = os.path.join(BASE_DIR, "best_xgb_model.pkl")
+    BASE_DIR = Path(__file__).resolve().parents[2]
+    DATA_PATH = BASE_DIR / "data" / "data.csv"
+    MODEL_PATH = BASE_DIR / "models" / "best_xgb_model.pkl"
     
     # 1️⃣ Load and clean data
     df_clean, X, y = load_and_clean_data(DATA_PATH)

@@ -1,8 +1,10 @@
 # health_index_score.py
 import pandas as pd
+from pathlib import Path
 from sklearn.preprocessing import MinMaxScaler
 
-DATA_PATH = "Asthma/data.csv"
+BASE_DIR = Path(__file__).resolve().parents[2]
+DATA_PATH = BASE_DIR / "data" / "data.csv"
 df = pd.read_csv(DATA_PATH, dtype={"ZIP": str})
 df.columns = df.columns.str.strip()
 df["ZIP"] = df["ZIP"].astype(str).str.strip().str.zfill(5)
