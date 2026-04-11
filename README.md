@@ -45,43 +45,43 @@ npm run preview
 ```
 
 ## Project Structure
-Datathon2026/
-├── backend/
-│   ├── Asthma/
-│   │   ├── air_quality.py
-│   │   ├── asthma_model.py
-│   │   ├── asthma_model.ipynb
-│   │   ├── asthma_statistics.py
-│   │   ├── shap_importance_plot.py
-│   │   └── zip_calculations.py
-│   ├── Cardiovascular/
-│   │   └── cardiovascular_model.py
-│   ├── Toxicity/
-│   │   └── LBW&Toxicity.ipynb
-│   ├── health_index/
-│   │   ├── health_index_score.py
-│   │   └── text_health.py
-│   ├── generate_predicted_zips.py
-│   └── main.py
-├── data/
-│   ├── cardiovascular.csv
-│   ├── data.csv
-│   ├── Melissa_zipcodes.csv
-│   ├── shap_importance.csv
-│   └── top_10_percentile_zips.csv
-├── frontend/
-│   └── src/
-│       ├── components/
-│       ├── data/
-│       ├── utils/
-│       ├── App.jsx
-│       ├── App.css
-│       ├── main.jsx
-│       └── index.css
-└── models/
-├── best_xgb_model.pkl
-├── cardiovascular_model.pkl
-└── NeuralNetwork.pkl
+Datathon2026/  
+├── backend/  
+│   ├── Asthma/  
+│   │   ├── air_quality.py  
+│   │   ├── asthma_model.py  
+│   │   ├── asthma_model.ipynb  
+│   │   ├── asthma_statistics.py  
+│   │   ├── shap_importance_plot.py  
+│   │   └── zip_calculations.py  
+│   ├── Cardiovascular/  
+│   │   └── cardiovascular_model.py  
+│   ├── Toxicity/  
+│   │   └── LBW&Toxicity.ipynb  
+│   ├── health_index/  
+│   │   ├── health_index_score.py  
+│   │   └── text_health.py  
+│   ├── generate_predicted_zips.py  
+│   └── main.py  
+├── data/  
+│   ├── cardiovascular.csv  
+│   ├── data.csv  
+│   ├── Melissa_zipcodes.csv  
+│   ├── shap_importance.csv  
+│   └── top_10_percentile_zips.csv  
+├── frontend/  
+│   └── src/  
+│       ├── components/  
+│       ├── data/  
+│       ├── utils/  
+│       ├── App.jsx  
+│       ├── App.css  
+│       ├── main.jsx  
+│       └── index.css  
+└── models/  
+├── best_xgb_model.pkl  
+├── cardiovascular_model.pkl  
+└── NeuralNetwork.pkl  
 
 ## How It Works
 
